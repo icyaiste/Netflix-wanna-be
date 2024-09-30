@@ -8,7 +8,7 @@ function App() {
     <>
       <main>
         <header>
-          <h1>Netflix from Wish</h1>
+          <h1 className='text-red-500 text-left'>Netflix from Wish</h1>
           <nav>
             <a href="">Categories</a>
             <a href="">Bookmarks</a>
