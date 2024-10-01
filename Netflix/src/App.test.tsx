@@ -13,5 +13,5 @@ test("should render headline", () => {
       <App />
     </BrowserRouter>,
   );
-  expect(screen.getByText("Vite + React")).toBeInTheDocument();
+  expect(screen.getByText("Trending")).toBeInTheDocument();
 });
