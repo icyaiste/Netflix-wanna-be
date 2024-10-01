@@ -10,7 +10,14 @@ jobs:
     steps:
       - name: Checkout changes
         uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v20
-      - name: Install project
-        run: npm i
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+         with:
+          node-version: '20' # Specify the Node.js version you want to use
+
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Run tests
+        run: npm test
