@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./Netflix
+
 jobs:
   testing:
     runs-on: ubuntu-latest
