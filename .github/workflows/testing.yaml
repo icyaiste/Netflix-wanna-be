@@ -11,6 +11,6 @@ jobs:
       - name: Checkout changes
         uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v20
       - name: Install project
         run: npm i
