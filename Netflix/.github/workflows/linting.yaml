@@ -1,0 +1,27 @@
+name: Linting
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+    defaults:
+  run:
+    shell: bash
+    working-directory: ./Netflix
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the current branch
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+      - name: Run npm install
+        run: npm install
+      - name: Run linting
+        run: npm run lint
+      - name: Run prettier
+        run: npm run prettier
