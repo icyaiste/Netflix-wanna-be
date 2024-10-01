@@ -1,15 +1,15 @@
-// import { useState } from 'react';
 import "./App.css";
 import { useNavigate } from "react-router-dom";
 import Header from "./components/Header";
+import Carousel from "./components/carousel/Carousel";
+import { slides } from "./components/carousel/carouselData.json";
 
 function App() {
   // const [count, setCount] = useState(0)
-
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate('/favs');
+    navigate("/favs");
   };
 
   return (
@@ -23,11 +23,9 @@ function App() {
             <a href="">Bookmarks</a>
           </nav>
         </header> */}
-        <section>
-          <section>
-            <h1>Trending</h1>
-           
-          </section>
+        <section className="h-full w-full">
+          <h1>Trending</h1>
+          <Carousel data={slides} />
           <section>
             <h1>Recommended</h1>
           </section>
