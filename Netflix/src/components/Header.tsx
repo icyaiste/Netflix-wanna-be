@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DropdownIcon from "../assets/drop_down_list_icon_155460.png";
-import NotflixLogo from "../assets/notflix.webp"
+import NotflixLogo from "../assets/notflix.webp";
 
 export default function Header() {
   const [search, setSearch] = useState("");
@@ -84,9 +84,21 @@ export default function Header() {
         />
       </section>
       <section className="flex col-start-4">
-        <h2 className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">Home</h2>
-        <h2 onClick={goToCategories} className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">Categories</h2>
-        <h2 onClick={goToBookmarks} className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">Bookmarks</h2>
+        <h2 className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">
+          Home
+        </h2>
+        <h2
+          onClick={goToCategories}
+          className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300"
+        >
+          Categories
+        </h2>
+        <h2
+          onClick={goToBookmarks}
+          className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300"
+        >
+          Bookmarks
+        </h2>
       </section>
     </section>
   );
