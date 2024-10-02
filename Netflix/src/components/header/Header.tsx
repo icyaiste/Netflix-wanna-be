@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DropdownIcon from "../../assets/drop_down_list_icon_155460.png";
 import NotflixLogo from "../../assets/notflix.webp";
+import BookmarkEmpty from "../../assets/bookmark-empty.jpg";
+// import BookmarkFull from "../../assets/bookmark-full.webp";
 import films from "../../movies/movies.json";
 import Fuse from "fuse.js";
 import { Movie } from "../../interfaces/Interfaces";
@@ -20,6 +22,11 @@ export default function Header() {
   const goToBookmarks = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate("/favs");
+  };
+
+  const goToHome = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    navigate("/");
   };
 
   const toggleDropdown = () => {
@@ -93,12 +100,34 @@ export default function Header() {
         <ul>
           {/* Conditionally render <ul> only if query is not empty and there are matching movies */}
           {query && searchedMovies.length > 0 && (
-            <ul className="absolute bg-black border-red-600 border rounded-lg mt-2 p-2">
+            <ul className="absolute bg-black border-white border rounded-lg justify-center mt-2 p-2 w-[54rem] flex flex-wrap">
               {searchedMovies.map((movie) => (
-                <li className="border-white rounded p-2" key={movie.title}>
-                  {movie.thumbnail} - {movie.year} - {movie.title} -{" "}
-                  {movie.genre}
-                </li>
+                <div
+                  className="border rounded border-white bg-red-800 p-2 flex flex-col place-items-center m-2 w-[16rem]"
+                  key={movie.title}
+                >
+                  <img
+                    className="w-[10rem] h-[16rem]"
+                    src={movie.thumbnail}
+                    alt=""
+                  />
+                  <p className="text-xl">
+                    {movie.year} / {movie.rating}
+                  </p>
+                  <article className="">
+                    <p className="text-white-600">{movie.title}</p>
+                    <p className="text-green-200">{movie.genre}</p>
+                  </article>
+                  <section className="flex place-items-center">
+                    <img
+                      className="w-[2rem] h-[2rem] m-1 text-sm"
+                      src={BookmarkEmpty}
+                    />
+                    <button className="text-center m-1 text-sm bg-blue-600">
+                      Learn more
+                    </button>
+                  </section>
+                </div>
               ))}
             </ul>
           )}
@@ -112,7 +141,10 @@ export default function Header() {
         </ul>
       </section>
       <section className="flex col-start-4">
-        <h2 className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">
+        <h2
+          onClick={goToHome}
+          className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300"
+        >
           Home
         </h2>
         <h2

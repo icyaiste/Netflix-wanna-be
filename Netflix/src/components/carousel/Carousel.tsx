@@ -34,12 +34,12 @@ function Carousel({ data }: CarouselProps) {
       {/* Carousel Slides */}
       <div
         className="flex transition-transform duration-500"
-        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        style={{ transform: `translateX(-${currentSlide * 5}%)` }}
       >
         {data.map((movie, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-[250px] h-[330px] p-[7px]"
+            className="flex-col flex-shrink-0 w-[225px] h-[330px] p-[7px]"
           >
             <img
               src={movie.thumbnail}
@@ -47,11 +47,11 @@ function Carousel({ data }: CarouselProps) {
               className="w-full h-[90%] object-contain rounded-lg shadow-md hover:cursor-pointer"
               onClick={() => handleNavigateToFilmInfo(movie.title)}
             />
-            <section className="h-[35px] w-[240px] flex">
-              <p className="ml-2 text-red-600 text-xl font-medium">
+            <section className="h-[35px] w-[95%] flex justify-between items-center">
+              <p className="ml-2 text-red-600 text-xl font-medium justify-self-start">
                 {movie.rating}
               </p>
-              <h2 className="mr-auto ml-[20%] text-xl font-semibold">
+              <h2 className=" text-xl font-semibold w-[50px] mr-[35%]">
                 {movie.year}
               </h2>
             </section>
