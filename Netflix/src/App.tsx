@@ -1,6 +1,7 @@
 import "./App.css";
 import { useNavigate } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Carousel from "./components/carousel/Carousel";
 import { slides } from "./components/carousel/carouselData.json";
 
@@ -34,6 +35,7 @@ function App() {
             <button onClick={handleNavigate}>Bookmarked</button>
           </section>
         </section>
+        <Footer />
       </main>
     </>
   );
