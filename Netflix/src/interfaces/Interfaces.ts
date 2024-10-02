@@ -1,10 +1,8 @@
-export interface Slide{
-    src: string;
-    alt: string;
+export interface Slide {
+  src: string;
+  alt: string;
 }
 
-
 export interface CarouselProps {
-    data: Slide[];
-  }
-  
+  data: Slide[];
+}
