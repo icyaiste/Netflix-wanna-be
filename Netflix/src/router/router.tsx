@@ -26,7 +26,6 @@ const router = createBrowserRouter([
     path: "/genre/:genreName",
     element: <ChosenGenre />,
   },
-  
 ]);
 
 export default router;
