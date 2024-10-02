@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DropdownIcon from "../assets/drop_down_list_icon_155460.png";
-import NotflixLogo from "../assets/notflix.webp";
+import DropdownIcon from "../../assets/drop_down_list_icon_155460.png";
+import NotflixLogo from "../../assets/notflix.webp";
 
 export default function Header() {
   const [search, setSearch] = useState("");
