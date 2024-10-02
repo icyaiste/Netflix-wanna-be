@@ -2,14 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DropdownIcon from "../../assets/drop_down_list_icon_155460.png";
 import NotflixLogo from "../../assets/notflix.webp";
-import films from "../../movies/movies.json";
-import Fuse from "fuse.js";
-import { Movie } from "../../interfaces/Interfaces";
 
 export default function Header() {
+  const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState<string>("");
-  const [searchedMovies, setSearchedMovies] = useState<Movie[]>(films);
+  // const [isSearching, setIsSearching] = useState(false);
 
   const navigate = useNavigate();
   const goToCategories = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,23 +23,18 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  const fuse = new Fuse(films, {
-    keys: ["title", "actors", "genre"],
-    threshold: 0.3,
-  });
-
-  const handleSearch = (searchTerm: string) => {
-    setQuery(searchTerm);
-    if (searchTerm.trim() === "") {
-      setSearchedMovies(films);
-    } else {
-      const fuseResults = fuse.search(searchTerm);
-      setSearchedMovies(fuseResults.map((result) => result.item));
-    }
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const value = e.target.value;
+    setSearch(value);
+    console.log(value);
+    // const formData = new FormData(event.currentTarget);
+    // const search = formData.get('search') as string;
+    // console.log(search);
   };
 
   return (
-    <section className="grid grid-cols-[1fr, 1fr, 2fr, 1fr] grid-rows-1 m-1 p-1 w-full h-[12rem] place-items-center bg-black ">
+    <section className="grid grid-cols[1fr, 1fr, 2fr, 1fr] grid-rows-1 m-1 p-1 w-full h-[12rem] place-items-center bg-black ">
       <div className="col-start-3 col-span-1 w-[20rem]">
         <img src={NotflixLogo} alt="" />
       </div>
@@ -87,29 +79,9 @@ export default function Header() {
           type="text"
           className="w-[15rem] h-1/3 bg-white text-black border rounded-3xl p-2"
           placeholder="Search"
-          value={query}
-          onChange={(e) => handleSearch(e.target.value)}
+          value={search}
+          onChange={handleSubmit}
         />
-        <ul>
-          {/* Conditionally render <ul> only if query is not empty and there are matching movies */}
-          {query && searchedMovies.length > 0 && (
-            <ul className="absolute bg-black border-red-600 border rounded-lg mt-2 p-2">
-              {searchedMovies.map((movie) => (
-                <li className="border-white rounded p-2" key={movie.title}>
-                  {movie.thumbnail} - {movie.year} - {movie.title} -{" "}
-                  {movie.genre}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {/* Optionally, display a "No movies found" message if there are no matches */}
-          {query && searchedMovies.length === 0 && (
-            <ul className="absolute bg-black border-red-600 rounded-lg mt-2 p-2">
-              <li>No movies found</li>
-            </ul>
-          )}
-        </ul>
       </section>
       <section className="flex col-start-4">
         <h2 className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">
