@@ -11,3 +11,4 @@ export interface Movie {
 export interface CarouselProps {
   data: Movie[];
 }
+
