@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
 
-    defaults:
+defaults:
   run:
     shell: bash
     working-directory: ./Netflix
