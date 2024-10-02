@@ -1,7 +1,27 @@
+import { useEffect, useState } from "react";
+import Header from "../../components/Header";
+
+
 function Bookmarked() {
+
+  const [faves, setFaves] = useState([]);
+
+  useEffect(() => {
+    const faves = JSON.parse(localStorage.getFaves('faves'));
+    if (faves) {
+    setFaves(faves);
+    }
+  }, [faves]);
+  console.log(faves);
+
   return (
     <div>
-      <h1>Bookmarked films here</h1>
+      <Header />
+      <div>
+        <h1>Bookmarks</h1>
+        {/** foreach? <moviecard />*/}
+      </div>
+
     </div>
   );
 }
