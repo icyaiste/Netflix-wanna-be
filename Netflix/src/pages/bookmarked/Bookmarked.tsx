@@ -15,8 +15,25 @@ function Bookmarked() {
   }, [faves]);
   console.log(faves);
 
+
+  const [faves, setFaves] = useState([]);
+
+  useEffect(() => {
+    const faves = JSON.parse(localStorage.getItem('faves') ?? "");
+    if (faves) {
+    setFaves(faves);
+    }
+  }, [faves]);
+  console.log(faves);
+
   return (
     <div>
+      <Header />
+      <div>
+        <h1>Bookmarks</h1>
+        <Carousel data = {faves}/>
+      </div>
+
       <Header />
       <div>
         <h1>Bookmarks</h1>
