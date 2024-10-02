@@ -6,3 +6,4 @@ export interface Slide {
 export interface CarouselProps {
   data: Slide[];
 }
+
