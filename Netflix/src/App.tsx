@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Carousel from "./components/carousel/Carousel";
-import { slides } from "./components/carousel/carouselData.json";
+import movies from "./movies/movies.json";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -26,7 +26,7 @@ function App() {
         </header> */}
         <section className="h-full w-full">
           <h1>Trending</h1>
-          <Carousel data={slides} />
+          <Carousel data={movies} />
           <section>
             <h1>Recommended</h1>
           </section>

@@ -30,19 +30,23 @@ function Carousel({ data }: CarouselProps) {
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {data.map((slide, index) => (
+        {data.map((movie, index) => (
           <div
             key={index}
             className="flex-shrink-0 w-[250px] h-[330px] p-[7px]"
           >
             <img
-              src={slide.src}
-              alt={slide.alt}
-              className="w-full h-[90%] object-cover rounded-lg shadow-md"
+              src={movie.thumbnail}
+              alt={movie.title}
+              className="w-full h-[90%] object-contain rounded-lg shadow-md"
             />
             <section className="h-[35px] w-[240px] flex">
-              <p className="ml-2 text-red-600 text-xl font-medium">15+</p>
-              <h2 className="mr-auto ml-[20%] text-xl font-semibold">2002</h2>
+              <p className="ml-2 text-red-600 text-xl font-medium">
+                {movie.rating}
+              </p>
+              <h2 className="mr-auto ml-[20%] text-xl font-semibold">
+                {movie.year}
+              </h2>
             </section>
           </div>
         ))}
