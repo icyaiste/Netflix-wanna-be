@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 function Categories() {
+
+  const navigate = useNavigate();
+
   const genres = [
     {
       name: "Action",
@@ -59,19 +62,25 @@ function Categories() {
         "https://miro.medium.com/v2/resize:fit:1400/0*xBkxfSKhRe8U5EDP.jpg",
     },
   ];
+
+  const handleClick = (genre: string) => {
+    navigate(`/genre/${genre}`);
+  }
+
+  
   return (
     <div>
       <Header />
       <div className="grid grid-cols-3 gap-x-2 gap-y-3 ">
         {genres.map((genre) => (
-          <Link to={`/genre/${genre.name}`} key={genre.name}>
             <section
+              key={genre.name}
               className="box-border h-64 w-64 bg-cover bg-center rounded-lg shadow-xl text-white flex items-center justify-center font-bold text-2xl text-white outline-4"
               style={{ backgroundImage: `url(${genre.image})` }}
+              onClick={() => handleClick(genre.name)}
             >
               <h2>{genre.name}</h2>
             </section>
-          </Link>
         ))}
       </div>
       <Footer />
