@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 function Categories() {
   const genres = [
@@ -61,7 +62,7 @@ function Categories() {
   return (
     <div>
       <Header />
-      <div className="grid grid-cols-3 gap-x-2 gap-y-3">
+      <div className="grid grid-cols-3 gap-x-2 gap-y-3 ">
         {genres.map((genre) => (
           <Link to={`/genre/${genre.name}`} key={genre.name}>
             <section
@@ -73,6 +74,7 @@ function Categories() {
           </Link>
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
