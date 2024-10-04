@@ -28,7 +28,7 @@ function Carousel({ data }: CarouselProps) {
       {/* Carousel Slides */}
       <div
         className="flex transition-transform duration-500"
-        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        style={{ transform: `translateX(-${currentSlide * 10}%)` }}
       >
         {data.map((movie, index) => (
           <div
