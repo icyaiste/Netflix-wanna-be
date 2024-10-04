@@ -3,7 +3,6 @@ import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
 
 function Categories() {
-
   const navigate = useNavigate();
 
   const genres = [
@@ -65,22 +64,21 @@ function Categories() {
 
   const handleClick = (genre: string) => {
     navigate(`/genre/${genre}`);
-  }
+  };
 
-  
   return (
     <div>
       <Header />
       <div className="grid grid-cols-3 gap-x-2 gap-y-3 ">
         {genres.map((genre) => (
-            <section
-              key={genre.name}
-              className="box-border h-64 w-64 bg-cover bg-center rounded-lg shadow-xl text-white flex items-center justify-center font-bold text-2xl text-white outline-4"
-              style={{ backgroundImage: `url(${genre.image})` }}
-              onClick={() => handleClick(genre.name)}
-            >
-              <h2>{genre.name}</h2>
-            </section>
+          <section
+            key={genre.name}
+            className="box-border h-64 w-64 bg-cover bg-center rounded-lg shadow-xl text-white flex items-center justify-center font-bold text-2xl text-white outline-4"
+            style={{ backgroundImage: `url(${genre.image})` }}
+            onClick={() => handleClick(genre.name)}
+          >
+            <h2>{genre.name}</h2>
+          </section>
         ))}
       </div>
       <Footer />
