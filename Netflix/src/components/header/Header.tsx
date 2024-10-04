@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DropdownIcon from "../../assets/drop_down_list_icon_155460.png";
 import NotflixLogo from "../../assets/notflix.webp";
+import BookmarkEmpty from "../../assets/bookmark-empty.jpg";
+// import BookmarkFull from "../../assets/bookmark-full.webp";
 import films from "../../movies/movies.json";
 import Fuse from "fuse.js";
 import { Movie } from "../../interfaces/Interfaces";
@@ -20,6 +22,11 @@ export default function Header() {
   const goToBookmarks = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate("/favs");
+  };
+
+  const goToHome = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    navigate("/");
   };
 
   const toggleDropdown = () => {
@@ -104,12 +111,22 @@ export default function Header() {
                     src={movie.thumbnail}
                     alt=""
                   />
-                  <br />
                   <p className="text-xl">
                     {movie.year} / {movie.rating}
                   </p>
-                  <p className="text-xl">{movie.title}</p>
-                  <p className="text-xl">{movie.genre}</p>
+                  <article className="">
+                    <p className="text-white-600">{movie.title}</p>
+                    <p className="text-green-200">{movie.genre}</p>
+                  </article>
+                  <section className="flex place-items-center">
+                    <img
+                      className="w-[2rem] h-[2rem] m-1 text-sm"
+                      src={BookmarkEmpty}
+                    />
+                    <button className="text-center m-1 text-sm bg-blue-600">
+                      Learn more
+                    </button>
+                  </section>
                 </div>
               ))}
             </ul>
@@ -124,7 +141,10 @@ export default function Header() {
         </ul>
       </section>
       <section className="flex col-start-4">
-        <h2 className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300">
+        <h2
+          onClick={goToHome}
+          className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300"
+        >
           Home
         </h2>
         <h2
