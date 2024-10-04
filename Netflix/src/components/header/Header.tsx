@@ -93,12 +93,24 @@ export default function Header() {
         <ul>
           {/* Conditionally render <ul> only if query is not empty and there are matching movies */}
           {query && searchedMovies.length > 0 && (
-            <ul className="absolute bg-black border-red-600 border rounded-lg mt-2 p-2">
+            <ul className="absolute bg-black border-white border rounded-lg justify-center mt-2 p-2 w-[54rem] flex flex-wrap">
               {searchedMovies.map((movie) => (
-                <li className="border-white rounded p-2" key={movie.title}>
-                  {movie.thumbnail} - {movie.year} - {movie.title} -{" "}
-                  {movie.genre}
-                </li>
+                <div
+                  className="border rounded border-white bg-red-800 p-2 flex flex-col place-items-center m-2 w-[16rem]"
+                  key={movie.title}
+                >
+                  <img
+                    className="w-[10rem] h-[16rem]"
+                    src={movie.thumbnail}
+                    alt=""
+                  />
+                  <br />
+                  <p className="text-xl">
+                    {movie.year} / {movie.rating}
+                  </p>
+                  <p className="text-xl">{movie.title}</p>
+                  <p className="text-xl">{movie.genre}</p>
+                </div>
               ))}
             </ul>
           )}
