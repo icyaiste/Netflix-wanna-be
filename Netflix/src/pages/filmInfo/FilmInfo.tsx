@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Movie } from "../../interfaces/Interfaces";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
@@ -8,6 +10,8 @@ function FilmInfo() {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
   useEffect(() => {
     const loadMovies = async () => {
       try {
@@ -18,6 +22,11 @@ function FilmInfo() {
         console.log("thats the title:", title);
         if (foundMovie) {
           setMovie(foundMovie);
+
+          const bookmarks = JSON.parse(
+            localStorage.getItem("bookmarkedMovies") || "[]",
+          );
+          setIsBookmarked(bookmarks.includes(foundMovie.title));
         }
       } catch (error) {
         console.error("Error loading movies:", error);
@@ -28,6 +37,25 @@ function FilmInfo() {
     loadMovies();
   }, [title]);
 
+  const toggleBookmark = () => {
+    setIsBookmarked((prev) => !prev);
+    const bookmarks = JSON.parse(
+      localStorage.getItem("bookmarkedMovies") || "[]",
+    );
+    if (isBookmarked) {
+      const updatedBookmarks = bookmarks.filter(
+        (b: string) => b !== movie?.title,
+      );
+      localStorage.setItem(
+        "bookmarkedMovies",
+        JSON.stringify(updatedBookmarks),
+      );
+    } else {
+      bookmarks.push(movie?.title);
+      localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarks));
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -37,39 +65,52 @@ function FilmInfo() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center max-w-lg mx-auto p-4 sm:p-8 bg-gray-900 min-h-screen text-white overflow-hidden">
-      <img
-        src={movie.thumbnail}
-        alt={movie.title}
-        className="w-full h-[40vh] object-contain rounded-lg shadow-xl mb-2"
-      />
-      <div className="text-center font-poppins">
-        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-          {movie.title}
-        </h1>
-        <p className="text-lg text-gray-500 italic">
-          {movie.year} | {movie.rating}
-        </p>
+    <section className="min-h-screen bg-black rounded-md p-2 m-2 text-white">
+      <Header />
+      <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto p-4 sm:p-6 md:p-10 lg:p-12">
+        <img
+          src={movie.thumbnail}
+          alt={movie.title}
+          className="w-full h-auto object-contain rounded-lg shadow-lg shadow-gray-300 mb-4"
+        />
+        <div className="text-center font-poppins">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            {movie.title}
+          </h1>
+          <p className="text-lg text-gray-400 italic">
+            {movie.year} | {movie.rating}
+          </p>
+        </div>
+        <div className="bg-gray-700 p-4 sm:p-6 rounded-lg shadow-sm w-full mt-4 font-karma relative">
+          <div className="flex flex-col mb-3">
+            <p className="text-gray-200">
+              <span className="font-bold text-xl">Actors:</span>{" "}
+              {movie.actors.join(", ")}
+            </p>
+            <p className="text-gray-200">
+              <span className="font-bold text-xl">Genre:</span> {movie.genre}
+            </p>
+            <p className="text-gray-200 mb-6">
+              <span className="font-bold text-xl">Synopsis:</span>{" "}
+              {movie.synopsis}
+            </p>
+          </div>
+
+          <div className="absolute bottom-2 right-2">
+            <button
+              onClick={toggleBookmark}
+              className={`text-xl mt-3 bg-transparent ${isBookmarked ? "text-yellow-500" : "text-gray-300"} transition-all`}
+              aria-label={isBookmarked ? "Remove Bookmark" : "Add Bookmark"}
+            >
+              <i
+                className={isBookmarked ? "fas fa-bookmark" : "far fa-bookmark"}
+              ></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="bg-gray-50 p-4 sm:p-6 rounded-lg shadow-lg w-full mt-4 font-karma">
-        <p className="text-gray-700 mb-3">
-          <span className="font-semibold">Actors:</span>{" "}
-          {movie.actors.join(", ")}
-        </p>
-        <p className="text-gray-700 mb-3">
-          <span className="font-semibold">Genre:</span> {movie.genre}
-        </p>
-        <p className="text-gray-700 mb-3">
-          <span className="font-semibold">Synopsis:</span> {movie.synopsis}
-        </p>
-      </div>
-      <button
-        onClick={() => navigate(-1)}
-        className="mt-6 px-6 py-2 bg-gradient-to-r from-red-700 to-red-500 text-white font-semibold rounded-full shadow-lg hover:from-red-500 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 transition-all font-raleway"
-      >
-        Go back
-      </button>
-    </div>
+      <Footer />
+    </section>
   );
 }
 
