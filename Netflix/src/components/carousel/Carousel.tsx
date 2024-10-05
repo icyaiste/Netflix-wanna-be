@@ -1,9 +1,11 @@
 import { CarouselProps } from "../../interfaces/Interfaces";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 
 function Carousel({ data }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate(); 
 
   const nextSlide = () => {
     const isLastSlide = currentSlide === data.length - 1;
@@ -15,6 +17,11 @@ function Carousel({ data }: CarouselProps) {
     const isFirstSlide = currentSlide === 0;
     const newSlide = isFirstSlide ? data.length - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
+  };
+
+ 
+  const handleNavigateToFilmInfo = (title: string) => {
+    navigate(`/info/${title}`); 
   };
 
   return (
@@ -30,13 +37,25 @@ function Carousel({ data }: CarouselProps) {
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {data.map((slide, index) => (
-          <div key={index} className="flex-shrink-0 w-full h-[700px]">
+        {data.map((movie, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 w-[250px] h-[330px] p-[7px]"
+          >
             <img
-              src={slide.src}
-              alt={slide.alt}
-              className="w-full h-full object-cover rounded-lg shadow-md"
+              src={movie.thumbnail}
+              alt={movie.title}
+              className="w-full h-[90%] object-contain rounded-lg shadow-md hover:cursor-pointer"
+              onClick={() => handleNavigateToFilmInfo(movie.title)} 
             />
+            <section className="h-[35px] w-[240px] flex">
+              <p className="ml-2 text-red-600 text-xl font-medium">
+                {movie.rating}
+              </p>
+              <h2 className="mr-auto ml-[20%] text-xl font-semibold">
+                {movie.year}
+              </h2>
+            </section>
           </div>
         ))}
       </div>
