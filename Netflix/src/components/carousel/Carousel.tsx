@@ -1,11 +1,11 @@
 import { CarouselProps } from "../../interfaces/Interfaces";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 function Carousel({ data }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const nextSlide = () => {
     const isLastSlide = currentSlide === data.length - 1;
@@ -19,9 +19,8 @@ function Carousel({ data }: CarouselProps) {
     setCurrentSlide(newSlide);
   };
 
- 
   const handleNavigateToFilmInfo = (title: string) => {
-    navigate(`/info/${title}`); 
+    navigate(`/info/${title}`);
   };
 
   return (
@@ -46,7 +45,7 @@ function Carousel({ data }: CarouselProps) {
               src={movie.thumbnail}
               alt={movie.title}
               className="w-full h-[90%] object-contain rounded-lg shadow-md hover:cursor-pointer"
-              onClick={() => handleNavigateToFilmInfo(movie.title)} 
+              onClick={() => handleNavigateToFilmInfo(movie.title)}
             />
             <section className="h-[35px] w-[240px] flex">
               <p className="ml-2 text-red-600 text-xl font-medium">
