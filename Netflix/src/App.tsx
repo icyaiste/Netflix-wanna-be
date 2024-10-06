@@ -1,15 +1,15 @@
-import "./App.css";
-import { useNavigate } from "react-router-dom";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import Trending from "./components/trending/Trending";
+import './App.css';
+import { useNavigate } from 'react-router-dom';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import Trending from './components/trending/Trending';
 
 function App() {
   // const [count, setCount] = useState(0)
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/favs");
+    navigate('/favs');
   };
 
   return (

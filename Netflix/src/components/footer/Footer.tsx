@@ -1,20 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Footer() {
   const navigate = useNavigate();
   const goToCategories = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate("/categories");
+    navigate('/categories');
   };
 
   const goToBookmarks = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate("/favs");
+    navigate('/favs');
   };
 
   const goToHome = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate("/");
+    navigate('/');
   };
 
   return (

@@ -1,7 +1,7 @@
-import { CarouselProps } from "../../interfaces/Interfaces";
-import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { CarouselProps } from '../../interfaces/Interfaces';
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Carousel({ data }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -44,7 +44,6 @@ function Carousel({ data }: CarouselProps) {
             <img
               src={movie.thumbnail}
               alt={movie.title}
-
               className="w-full h-[90%] object-contain rounded-lg shadow-md"
               onClick={() => handleNavigateToFilmInfo(movie.title)}
             />

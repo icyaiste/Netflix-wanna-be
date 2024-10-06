@@ -1,6 +1,6 @@
-import Carousel from "../carousel/Carousel.tsx";
-import { Movie } from "../../interfaces/Interfaces.ts";
-import data from "../../movies/movies.json";
+import Carousel from '../carousel/Carousel.tsx';
+import { Movie } from '../../interfaces/Interfaces.ts';
+import data from '../../movies/movies.json';
 
 function Trending() {
   // Function to select even-indexed and shuffled movies
