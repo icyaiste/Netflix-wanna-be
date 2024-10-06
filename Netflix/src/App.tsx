@@ -16,13 +16,6 @@ function App() {
     <>
       <main>
         <Header />
-        {/* <header>
-          <h1 className="text-red-500 text-left">Netflix from Wish</h1>
-          <nav>
-            <a href="">Categories</a>
-            <a href="">Bookmarks</a>
-          </nav>
-        </header> */}
         <section className="h-full w-full">
           <h1>Trending</h1>
           <Trending />
