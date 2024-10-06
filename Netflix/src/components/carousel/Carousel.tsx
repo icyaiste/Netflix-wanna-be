@@ -46,13 +46,6 @@ function Carousel({ data }: CarouselProps) {
               alt={movie.title}
 
               className="w-full h-[90%] object-contain rounded-lg shadow-md"
-            />
-            <section className="h-[35px] w-[240px] flex">
-              <p className="ml-2 text-red-600 text-xl font-medium">
-                {movie.rating}
-              </p>
-              <h2 className="mr-auto ml-[20%] text-xl font-semibold">
-              className="w-full h-[90%] object-contain rounded-lg shadow-md hover:cursor-pointer"
               onClick={() => handleNavigateToFilmInfo(movie.title)}
             />
             <section className="h-[35px] w-[95%] flex justify-between items-center">
@@ -60,7 +53,6 @@ function Carousel({ data }: CarouselProps) {
                 {movie.rating}
               </p>
               <h2 className=" text-xl font-semibold w-[50px] mr-[35%]">
-
                 {movie.year}
               </h2>
             </section>
