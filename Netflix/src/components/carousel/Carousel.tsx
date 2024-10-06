@@ -1,3 +1,4 @@
+
 import { CarouselProps } from "../../interfaces/Interfaces";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { useState } from "react";
