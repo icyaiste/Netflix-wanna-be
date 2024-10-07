@@ -1,16 +1,16 @@
-import "./App.css";
-import { useNavigate } from "react-router-dom";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import Carousel from "./components/carousel/Carousel";
-import movies from "./movies/movies.json";
+import './App.css';
+import { useNavigate } from 'react-router-dom';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import Carousel from './components/carousel/Carousel';
+import movies from './movies/movies.json';
 
 function App() {
   // const [count, setCount] = useState(0)
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/favs");
+    navigate('/favs');
   };
 
   return (

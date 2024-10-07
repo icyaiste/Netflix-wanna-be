@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Movie } from "../../interfaces/Interfaces";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Movie } from '../../interfaces/Interfaces';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
-  console.log("Retrieved title from URL:", title);
+  console.log('Retrieved title from URL:', title);
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -16,26 +16,26 @@ function FilmInfo() {
     const loadMovies = async () => {
       try {
         //importera filmer från movies.json filen
-        const res = await import("../../movies/movies.json");
+        const res = await import('../../movies/movies.json');
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
-        console.log("movie:", movies);
+        console.log('movie:', movies);
         //hitta filmen med den aktuella title
         const foundMovie = movies.find((movie) => movie.title === title);
-        console.log("thats the title:", title);
+        console.log('thats the title:', title);
         //om hittar filmen
         if (foundMovie) {
           //säta filmen i state
           setMovie(foundMovie);
           //hämta bookmarked filmer från local storage eller  en tom array om inga filmer finns
           const bookmarks = JSON.parse(
-            localStorage.getItem("bookmarkedMovies") || "[]",
+            localStorage.getItem('bookmarkedMovies') || '[]',
           );
           //kolla om den hittade filmen är redan bookmarked
           setIsBookmarked(bookmarks.includes(foundMovie.title));
         }
       } catch (error) {
-        console.error("Error loading movies:", error);
+        console.error('Error loading movies:', error);
       } finally {
         setLoading(false);
       }
@@ -48,7 +48,7 @@ function FilmInfo() {
     setIsBookmarked((prev) => !prev);
     //hämta bookmarked filmer från local storage eller  en tom array om inga filmer finns
     const bookmarks = JSON.parse(
-      localStorage.getItem("bookmarkedMovies") || "[]",
+      localStorage.getItem('bookmarkedMovies') || '[]',
     );
     //kolla om filmen  är bookmarked
     if (isBookmarked) {
@@ -59,14 +59,14 @@ function FilmInfo() {
       );
       //local storage uppdateras med dem nya filmerna
       localStorage.setItem(
-        "bookmarkedMovies",
+        'bookmarkedMovies',
         JSON.stringify(updatedBookmarks),
       );
     } else {
       //om filmen inte bookmarked  lägga till filmen i bookmarked filmer
       bookmarks.push(movie?.title);
       //local storage uppdateras med listan som inkluderar den bookmarked filmen
-      localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarks));
+      localStorage.setItem('bookmarkedMovies', JSON.stringify(bookmarks));
     }
   };
 
@@ -98,14 +98,14 @@ function FilmInfo() {
         <div className="bg-gray-700 p-4 sm:p-6 rounded-lg shadow-sm w-full mt-4 font-karma relative">
           <div className="flex flex-col mb-3">
             <p className="text-gray-200">
-              <span className="font-bold text-xl">Actors:</span>{" "}
-              {movie.actors.join(", ")}
+              <span className="font-bold text-xl">Actors:</span>{' '}
+              {movie.actors.join(', ')}
             </p>
             <p className="text-gray-200">
               <span className="font-bold text-xl">Genre:</span> {movie.genre}
             </p>
             <p className="text-gray-200 mb-6">
-              <span className="font-bold text-xl">Synopsis:</span>{" "}
+              <span className="font-bold text-xl">Synopsis:</span>{' '}
               {movie.synopsis}
             </p>
           </div>
@@ -113,11 +113,11 @@ function FilmInfo() {
           <div className="absolute bottom-2 right-2">
             <button
               onClick={toggleBookmark}
-              className={`text-xl mt-3 bg-transparent ${isBookmarked ? "text-yellow-500" : "text-gray-300"} transition-all`}
-              aria-label={isBookmarked ? "Remove Bookmark" : "Add Bookmark"}
+              className={`text-xl mt-3 bg-transparent ${isBookmarked ? 'text-yellow-500' : 'text-gray-300'} transition-all`}
+              aria-label={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
             >
               <i
-                className={isBookmarked ? "fas fa-bookmark" : "far fa-bookmark"}
+                className={isBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark'}
               ></i>
             </button>
           </div>
