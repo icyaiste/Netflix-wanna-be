@@ -1,29 +1,29 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Bookmarked from "../pages/bookmarked/Bookmarked";
-import Categories from "../pages/categories/Categories";
-import FilmInfo from "../pages/filmInfo/FilmInfo";
-import ChosenGenre from "../pages/ChosenGenre/ChosenGenre";
+import { createBrowserRouter } from 'react-router-dom';
+import App from '../App';
+import Bookmarked from '../pages/bookmarked/Bookmarked';
+import Categories from '../pages/categories/Categories';
+import FilmInfo from '../pages/filmInfo/FilmInfo';
+import ChosenGenre from '../pages/ChosenGenre/ChosenGenre';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
   },
   {
-    path: "/favs",
+    path: '/favs',
     element: <Bookmarked />,
   },
   {
-    path: "/categories",
+    path: '/categories',
     element: <Categories />,
   },
   {
-    path: "/info/:title",
+    path: '/info/:title',
     element: <FilmInfo />,
   },
   {
-    path: "/genre/:selectedGenre",
+    path: '/genre/:selectedGenre',
     element: <ChosenGenre />,
   },
 ]);

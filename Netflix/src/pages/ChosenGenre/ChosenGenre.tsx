@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
-import moviesData from "../../movies/movies.json";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+import { useParams } from 'react-router-dom';
+import moviesData from '../../movies/movies.json';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
 
 const ChosenGenre = () => {
   const { selectedGenre } = useParams();
 
   const filteredMovies = moviesData.filter((movie) =>
-    movie.genre.split(", ").includes(selectedGenre || ""),
+    movie.genre.split(', ').includes(selectedGenre || ''),
   );
 
   return (
