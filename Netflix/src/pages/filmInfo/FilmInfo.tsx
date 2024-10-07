@@ -6,7 +6,7 @@ import Footer from "../../components/footer/Footer";
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
-  console.log("Retrieved title from URL:", title);
+  //console.log("Retrieved title from URL:", title);
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,7 @@ function FilmInfo() {
         const res = await import("../../movies/movies.json");
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
-        console.log("movie:", movies);
+       // console.log("movie:", movies);
         //hitta filmen med den aktuella title
         const foundMovie = movies.find((movie) => movie.title === title);
         console.log("thats the title:", title);
