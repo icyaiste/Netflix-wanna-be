@@ -47,5 +47,4 @@ const ChosenGenre = () => {
     </div>
   );
 };
-
 export default ChosenGenre;
