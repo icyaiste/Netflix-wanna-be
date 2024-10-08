@@ -48,6 +48,10 @@ export default function Header() {
     }
   };
 
+  const handleNavigateToFilmInfo = (title: string) => {
+    navigate(`/info/${title}`);
+  };
+
   return (
     <section className="grid grid-cols-[1fr, 1fr, 2fr, 1fr] grid-rows-1 m-1 p-1 w-full h-[12rem] place-items-center bg-black ">
       <div className="col-start-3 col-span-1 w-[20rem]">
@@ -123,7 +127,10 @@ export default function Header() {
                       className="w-[2rem] h-[2rem] m-1 text-sm"
                       src={BookmarkEmpty}
                     />
-                    <button className="text-center m-1 text-sm bg-blue-600">
+                    <button
+                      onClick={() => handleNavigateToFilmInfo(movie.title)}
+                      className="text-center m-1 text-sm bg-blue-600"
+                    >
                       Learn more
                     </button>
                   </section>
