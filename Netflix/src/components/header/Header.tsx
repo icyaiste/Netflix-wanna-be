@@ -1,32 +1,32 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DropdownIcon from "../../assets/drop_down_list_icon_155460.png";
-import NotflixLogo from "../../assets/notflix.webp";
-import BookmarkEmpty from "../../assets/bookmark-empty.jpg";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DropdownIcon from '../../assets/drop_down_list_icon_155460.png';
+import NotflixLogo from '../../assets/notflix.webp';
+import BookmarkEmpty from '../../assets/bookmark-empty.jpg';
 // import BookmarkFull from "../../assets/bookmark-full.webp";
-import films from "../../movies/movies.json";
-import Fuse from "fuse.js";
-import { Movie } from "../../interfaces/Interfaces";
+import films from '../../movies/movies.json';
+import Fuse from 'fuse.js';
+import { Movie } from '../../interfaces/Interfaces';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<string>('');
   const [searchedMovies, setSearchedMovies] = useState<Movie[]>(films);
 
   const navigate = useNavigate();
   const goToCategories = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    navigate("/categories");
+    navigate('/categories');
   };
 
   const goToBookmarks = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    navigate("/favs");
+    navigate('/favs');
   };
 
   const goToHome = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    navigate("/");
+    navigate('/');
   };
 
   const toggleDropdown = () => {
@@ -34,13 +34,13 @@ export default function Header() {
   };
 
   const fuse = new Fuse(films, {
-    keys: ["title", "actors", "genre"],
+    keys: ['title', 'actors', 'genre'],
     threshold: 0.3,
   });
 
   const handleSearch = (searchTerm: string) => {
     setQuery(searchTerm);
-    if (searchTerm.trim() === "") {
+    if (searchTerm.trim() === '') {
       setSearchedMovies(films);
     } else {
       const fuseResults = fuse.search(searchTerm);
@@ -63,9 +63,9 @@ export default function Header() {
         {/* Dropdown Menu */}
         <div
           className={`absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg transition-all duration-300 ease-in-out origin-top transform ${
-            isOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
+            isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}
-          style={{ transformOrigin: "top" }}
+          style={{ transformOrigin: 'top' }}
         >
           <ul className="flex flex-col">
             <li

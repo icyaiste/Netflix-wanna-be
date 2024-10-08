@@ -1,14 +1,21 @@
-import { useParams } from "react-router-dom";
-import moviesData from "../../movies/movies.json";
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+import { useParams } from 'react-router-dom';
+import moviesData from '../../movies/movies.json';
+import Header from '../../components/header/Header';
+import Footer from '../../components/footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const ChosenGenre = () => {
   const { selectedGenre } = useParams();
 
   const filteredMovies = moviesData.filter((movie) =>
-    movie.genre.split(", ").includes(selectedGenre || ""),
+    movie.genre.split(', ').includes(selectedGenre || ''),
   );
+
+  const navigate = useNavigate();
+
+  const handleNavigateToFilmInfo = (title: string) => {
+    navigate(`/info/${title}`);
+  };
 
   return (
     <div>
@@ -16,11 +23,12 @@ const ChosenGenre = () => {
       <h1 className="text-4xl font-bold text-center mb-10">
         {selectedGenre} Movies
       </h1>
-      <div className="grid grid-cols-3 gap-x-3 gap-y-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
         {filteredMovies.map((movie) => (
           <div
             key={movie.title}
-            className="h-100% w-100% bg-cover bg-center pb-20 rhadow-xl text-black "
+            className="h-100% sm:h-500% w-100% bg-cover bg-center pb-20 rhadow-xl text-black hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
+            onClick={() => handleNavigateToFilmInfo(movie.title)}
           >
             <img
               src={movie.thumbnail}
