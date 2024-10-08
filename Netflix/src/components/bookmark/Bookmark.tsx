@@ -31,12 +31,12 @@ function Bookmark({ movie }: BookmarkProps) {
     }
   }
 
-    //button
-    return (
-        <div>
-            <button onClick={mark}>*</button>
-        </div>
-    )
-};
+  //button
+  return (
+    <div>
+      <button onClick={mark}>*</button>
+    </div>
+  );
+}
 
-export default Bookmark
+export default Bookmark;
