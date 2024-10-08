@@ -5,18 +5,15 @@ import movies from '../movies/movies.json';
 import { test, expect, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 
-//Testa om property isTrending = true
-
 beforeEach(() => {
   render(
     <MemoryRouter>
-      <Carousel data={movies} labelledBy='Trending'/>
+      <Carousel data={movies} labelledBy="Trending" />
     </MemoryRouter>,
   );
 });
 
-
-test.only('renders trending movies', () => {
+test('renders trending movies', () => {
   // Filter even indexed movies
   const evenIndexedMovies = movies.filter((_, index) => index % 2 === 0);
 
@@ -35,3 +32,5 @@ test.only('renders trending movies', () => {
     });
   }
 });
+
+//Testa om property isTrending = true
