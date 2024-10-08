@@ -2,6 +2,9 @@ import Carousel from '../carousel/Carousel.tsx';
 import { Movie } from '../../interfaces/Interfaces.ts';
 import data from '../../movies/movies.json';
 
+
+//Välja filmer som har property isTrending = true
+
 function Trending() {
   // Function to select even-indexed and shuffled movies
   const selectMovies = (allMovies: Movie[], limit: number): Movie[] => {

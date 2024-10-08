@@ -5,7 +5,6 @@ import Footer from './components/footer/Footer';
 import Trending from './components/trending/Trending';
 
 function App() {
-  // const [count, setCount] = useState(0)
   const navigate = useNavigate();
 
   const handleNavigate = () => {
