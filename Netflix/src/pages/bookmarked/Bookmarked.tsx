@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
-import Header from "../../components/header/Header";
-import Carousel from "../../components/carousel/Carousel";
+import Header from '../../components/header/Header';
+import Carousel from '../../components/carousel/Carousel';
+import Footer from '../../components/footer/Footer';
+
+import { useBookmarks } from '../../context/BookmarkContext';
 
 
 function Bookmarked() {
-
-  const [faves, setFaves] = useState([]);
-
-  useEffect(() => {
-    const faves = JSON.parse(localStorage.getItem('faves') ?? "");
-    if (faves) {
-    setFaves(faves);
-    }
-  }, [faves]);
-  console.log(faves);
+  const { faves } = useBookmarks();
 
   return (
     <div>

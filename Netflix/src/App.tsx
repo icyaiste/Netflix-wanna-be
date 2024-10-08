@@ -4,9 +4,10 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Trending from './components/trending/Trending';
 import Recommended from './components/recommended/Recommended';
+import Carousel from './components/carousel/Carousel';
+import movies from './movies/movies.json';
 
 function App() {
-  // const [count, setCount] = useState(0)
   const navigate = useNavigate();
 
   const handleNavigate = () => {

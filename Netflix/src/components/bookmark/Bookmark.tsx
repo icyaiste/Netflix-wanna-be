@@ -1,26 +1,36 @@
-import { useEffect, useState } from "react"
+import { useEffect } from 'react';
+import { BookmarkProps } from '../../interfaces/Interfaces';
+import { useBookmarks } from '../../context/BookmarkContext';
 
-function Bookmark(movie) {
+function Bookmark({ movie }: BookmarkProps) {
+  const { faves, setFaves } = useBookmarks();
 
-    const [faves, setFaves] = useState<any[]>([]);
+  //every time state updates push into local storage
+  useEffect(() => {
+    try {
+      localStorage.setItem('faves', JSON.stringify(faves));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [faves]);
 
-    useEffect(() => {
-        // Hämtar alla bokmärken och sparar faves
-        setFaves(JSON.parse(localStorage.getItem('faves') ?? ""))
-    }, []);
-    
-    //every time state updates push into local storage
-    useEffect(() => {
-        function setItem<T>(faves: string, value: T): void {
-                try {
-                    localStorage.setItem(faves, JSON.stringify(value));
-                    } catch (error) {
-                        console.log(error);
-                    }
-            }
-            
-        setItem('faves', faves);
-    }, [faves]);
+  //when button gets clicked update state
+  function mark() {
+    const isFavorite = faves.some((fave) => fave.title === movie.title);
+
+    if (isFavorite) {
+      // Remove the movie from favorites if it's already a favorite
+      console.log('removed bookmark');
+      const newArray = faves.filter((fave) => fave.title !== movie.title);
+
+      setFaves(newArray);
+    } else {
+      // Add the movie to favorites
+      console.log('added bookmark');
+      console.log([...faves, movie]);
+      setFaves((prevFaves) => [...prevFaves, movie]);
+    }
+  }
 
     //when button gets clicked udate state
     function mark() {

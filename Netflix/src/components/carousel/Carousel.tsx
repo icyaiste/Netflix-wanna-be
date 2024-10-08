@@ -2,6 +2,7 @@ import { CarouselProps } from '../../interfaces/Interfaces';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Bookmark from '../bookmark/Bookmark';
 
 function Carousel({ data }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
