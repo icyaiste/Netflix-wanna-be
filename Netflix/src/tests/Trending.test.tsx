@@ -11,18 +11,11 @@ import { MemoryRouter } from 'react-router-dom';
 beforeEach(() => {
   render(
     <MemoryRouter>
-      <Carousel data={movies} />
+      <Carousel data={movies} labelledBy='Trending'/>
     </MemoryRouter>,
   );
 });
 
-beforeEach(() => {
-  render(
-    <MemoryRouter>
-      <Carousel data={movies} />
-    </MemoryRouter>,
-  );
-});
 
 test.only('renders trending movies', () => {
   // Filter even indexed movies
