@@ -59,6 +59,7 @@ export default function Header() {
       </div>
       <div className="relative col-start-1 row-start-1 place-self-start-center m-2 bg-gray-600 rounded p-1">
         <img
+          aria-label="icon"
           src={DropdownIcon}
           onClick={toggleDropdown}
           className="w-10 h-10 cursor-pointer"
@@ -66,6 +67,7 @@ export default function Header() {
         />
         {/* Dropdown Menu */}
         <div
+          aria-label="dropdown"
           className={`absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg transition-all duration-300 ease-in-out origin-top transform ${
             isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}
@@ -95,7 +97,7 @@ export default function Header() {
       </div>
       <section className="col-start-2 row-start-1">
         <input
-          type="text"
+          role="searchbox"
           className="w-[15rem] h-1/3 bg-white text-black border rounded-3xl p-2"
           placeholder="Search"
           value={query}
@@ -128,6 +130,7 @@ export default function Header() {
                       src={BookmarkEmpty}
                     />
                     <button
+                      role="button"
                       onClick={() => handleNavigateToFilmInfo(movie.title)}
                       className="text-center m-1 text-sm bg-blue-600"
                     >
@@ -155,6 +158,7 @@ export default function Header() {
           Home
         </h2>
         <h2
+          aria-label="Categories Header"
           onClick={goToCategories}
           className="mr-6 text-gray-400 cursor-pointer hover:text-blue-300"
         >
