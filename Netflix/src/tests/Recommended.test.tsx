@@ -14,7 +14,7 @@ beforeEach(() => {
   );
 });
 
-test.only('there are 10 recommended movies', async () => {
+test('there are 10 recommended movies', async () => {
   const container = screen.getByLabelText('Recommended');
   const movies = await within(container).findAllByRole('img');
   expect(movies).toHaveLength(10);
