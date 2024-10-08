@@ -4,12 +4,15 @@ import { render, screen } from '@testing-library/react';
 import movies from '../movies/movies.json';
 import { test, expect, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
+import BookmarkProvider from '../context/BookmarkContext';
 
 beforeEach(() => {
   render(
-    <MemoryRouter>
-      <Carousel data={movies} labelledBy="Trending" />
-    </MemoryRouter>,
+    <BookmarkProvider>
+      <MemoryRouter>
+        <Carousel data={movies} labelledBy="Trending" />
+      </MemoryRouter>
+    </BookmarkProvider>,
   );
 });
 
