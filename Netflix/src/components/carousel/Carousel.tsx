@@ -35,13 +35,13 @@ function Carousel({ data }: CarouselProps) {
       <div
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentSlide * 5}%)` }}
-      >      
+      >
         {data.map((movie, index) => (
           <div
             key={index}
             className="flex-col flex-shrink-0 w-[225px] h-[330px] p-[7px]"
           >
-            <Bookmark movie={ movie }/>
+            <Bookmark movie={movie} />
             <img
               src={movie.thumbnail}
               alt={movie.title}
