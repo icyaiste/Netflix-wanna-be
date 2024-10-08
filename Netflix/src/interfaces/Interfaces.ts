@@ -12,6 +12,7 @@ export interface Movie {
 
 export interface CarouselProps {
   data: Movie[];
+  labelledBy: string;
 }
 
 export interface BookmarkProps {

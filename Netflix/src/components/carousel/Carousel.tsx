@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Bookmark from '../bookmark/Bookmark';
 
-function Carousel({ data }: CarouselProps) {
+function Carousel({ data, labelledBy }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
 
@@ -25,7 +25,10 @@ function Carousel({ data }: CarouselProps) {
   };
 
   return (
-    <main className="relative flex justify-center items-center w-full overflow-hidden">
+    <section
+      className="relative flex justify-center items-center w-full overflow-hidden"
+      aria-label={labelledBy}
+    >
       {/* Left Arrow */}
       <BsArrowLeftCircleFill
         className="absolute left-4 w-8 h-8 text-white rounded-full shadow-lg hover:cursor-pointer z-10"
@@ -65,7 +68,7 @@ function Carousel({ data }: CarouselProps) {
         className="absolute right-4 w-8 h-8 text-white rounded-full shadow-lg hover:cursor-pointer z-10"
         onClick={nextSlide}
       />
-    </main>
+    </section>
   );
 }
 
