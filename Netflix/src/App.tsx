@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Trending from './components/trending/Trending';
+import Recommended from './components/recommended/Recommended';
 
 function App() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function App() {
           <Trending />
           <section>
             <h1>Recommended</h1>
+            <Recommended />
           </section>
           <section>
             <h1>Bookmarks</h1>
