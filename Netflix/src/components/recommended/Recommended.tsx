@@ -20,8 +20,7 @@ function Recommended() {
 
   return (
     <div>
-      {/* Pass only the selected trending movies to the Carousel */}
-      <Carousel data={recMovies} />
+      <Carousel data={recMovies} labelledBy="Recommended" />
     </div>
   );
 }
