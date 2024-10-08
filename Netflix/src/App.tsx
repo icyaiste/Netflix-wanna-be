@@ -6,7 +6,6 @@ import Trending from './components/trending/Trending';
 import Recommended from './components/recommended/Recommended';
 
 function App() {
-  // const [count, setCount] = useState(0)
   const navigate = useNavigate();
 
   const handleNavigate = () => {

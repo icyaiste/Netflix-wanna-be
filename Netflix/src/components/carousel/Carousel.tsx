@@ -2,6 +2,7 @@ import { CarouselProps } from '../../interfaces/Interfaces';
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from 'react-icons/bs';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Bookmark from '../bookmark/Bookmark';
 
 function Carousel({ data }: CarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -30,7 +31,6 @@ function Carousel({ data }: CarouselProps) {
         className="absolute left-4 w-8 h-8 text-white rounded-full shadow-lg hover:cursor-pointer z-10"
         onClick={prevSlide}
       />
-
       {/* Carousel Slides */}
       <div
         className="flex transition-transform duration-500"
@@ -41,6 +41,7 @@ function Carousel({ data }: CarouselProps) {
             key={index}
             className="flex-col flex-shrink-0 w-[225px] h-[330px] p-[7px]"
           >
+            <Bookmark movie={movie} />
             <img
               src={movie.thumbnail}
               alt={movie.title}
