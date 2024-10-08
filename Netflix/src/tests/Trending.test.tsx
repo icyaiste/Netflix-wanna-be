@@ -7,19 +7,10 @@ import { MemoryRouter } from 'react-router-dom';
 
 //Testa om property isTrending = true
 
-
 beforeEach(() => {
   render(
     <MemoryRouter>
-      <Carousel data={movies} />
-    </MemoryRouter>,
-  );
-});
-
-beforeEach(() => {
-  render(
-    <MemoryRouter>
-      <Carousel data={movies} />
+      <Carousel data={movies} labelledBy="Trending" />
     </MemoryRouter>,
   );
 });
@@ -39,7 +30,7 @@ test.only('renders trending movies', () => {
     // Expect each image to be in the document
     movieImages.forEach((image) => {
       expect(image).toBeInTheDocument();
-      screen.debug()
+      screen.debug();
     });
- }
+  }
 });
