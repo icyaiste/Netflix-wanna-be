@@ -10,10 +10,11 @@ import { MemoryRouter } from 'react-router-dom';
 beforeEach(() => {
   render(
     <MemoryRouter>
-      <Carousel data={movies} labelledBy="Trending" />
+      <Carousel data={movies} labelledBy='Trending'/>
     </MemoryRouter>,
   );
 });
+
 
 test.only('renders trending movies', () => {
   // Filter even indexed movies

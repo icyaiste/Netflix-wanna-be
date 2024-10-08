@@ -1,3 +1,5 @@
+import { SetStateAction, Dispatch } from 'react';
+
 export interface Movie {
   title: string;
   year: number;
@@ -11,4 +13,13 @@ export interface Movie {
 export interface CarouselProps {
   data: Movie[];
   labelledBy: string;
+}
+
+export interface BookmarkProps {
+  movie: Movie;
+}
+
+export interface bookmarkContextInterface {
+  faves: Movie[];
+  setFaves: Dispatch<SetStateAction<Movie[]>>;
 }

@@ -73,7 +73,7 @@ function Categories() {
         {genres.map((genre) => (
           <section
             key={genre.name}
-            className="box-border h-64 w-64 bg-cover bg-center rounded-lg shadow-xl text-white flex items-center justify-center font-bold text-2xl text-white outline-4"
+            className="h-80 w-full bg-cover bg-center rounded-lg shadow-xl text-white flex items-center justify-center font-bold text-3xl text-white  outline-4 hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
             style={{ backgroundImage: `url(${genre.image})` }}
             onClick={() => handleClick(genre.name)}
           >
