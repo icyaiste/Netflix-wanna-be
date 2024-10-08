@@ -27,22 +27,9 @@ function Bookmark({ movie }: BookmarkProps) {
     } else {
       // Add the movie to favorites
       console.log('added bookmark');
-      console.log([...faves, movie]);
       setFaves((prevFaves) => [...prevFaves, movie]);
     }
   }
-
-    //when button gets clicked udate state
-    function mark() {
-        for (let i = 0; i < faves?.length; i++) {
-            if (movie.title === faves[i].title) {
-                const newArray = faves.splice(i, 1)
-                setFaves(newArray)
-                return
-            }
-        }
-        setFaves([...faves, movie])
-    };
 
     //button
     return (

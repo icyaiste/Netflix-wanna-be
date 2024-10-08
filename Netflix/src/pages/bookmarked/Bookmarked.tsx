@@ -4,7 +4,6 @@ import Footer from '../../components/footer/Footer';
 
 import { useBookmarks } from '../../context/BookmarkContext';
 
-
 function Bookmarked() {
   const { faves } = useBookmarks();
 
@@ -15,7 +14,7 @@ function Bookmarked() {
         <h1>Bookmarks</h1>
         <Carousel data = {faves}/>
       </div>
-
+      <Footer />
     </div>
   );
 }
