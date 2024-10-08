@@ -69,11 +69,13 @@ function Categories() {
   return (
     <div>
       <Header />
-      <div className="grid grid-cols-3 gap-x-2 gap-y-3 ">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 px-4 py-8">
+        {/*responsive,mobilefriendly */}
         {genres.map((genre) => (
           <section
             key={genre.name}
-            className="h-80 w-full bg-cover bg-center rounded-lg shadow-xl text-white flex items-center justify-center font-bold text-3xl text-white  outline-4 hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
+            className="h-56 sm:h-80 w-full bg-cover bg-center rounded-lg shadow-lg text-white flex items-center justify-center 
+             font-bold text-xl sm:text-2xl md:text-3xl hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
             style={{ backgroundImage: `url(${genre.image})` }}
             onClick={() => handleClick(genre.name)}
           >

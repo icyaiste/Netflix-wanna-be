@@ -19,7 +19,7 @@ function FilmInfo() {
         const res = await import('../../movies/movies.json');
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
-       // console.log("movie:", movies);
+        // console.log("movie:", movies);
         //hitta filmen med den aktuella title
         const foundMovie = movies.find((movie) => movie.title === title);
         console.log('thats the title:', title);
@@ -80,22 +80,24 @@ function FilmInfo() {
 
   return (
     <section className="min-h-screen bg-black rounded-md p-2 m-2 text-white">
+      {/*responsive,mobilefriendly */}
       <Header />
-      <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto p-4 sm:p-6 md:p-10 lg:p-12">
+      <div className="flex flex-col items-center justify-center w-full max-w-lg mx-auto p-4">
         <img
           src={movie.thumbnail}
           alt={movie.title}
           className="w-full h-auto object-contain rounded-lg shadow-lg shadow-gray-300 mb-4"
         />
+        {/*responsive,mobilefriendly */}
         <div className="text-center font-poppins">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+          <h1 className="text-2xl sm:text-3xl  font-bold mb-2">
             {movie.title}
           </h1>
-          <p className="text-lg text-gray-400 italic">
+          <p className="text-lg sm:text-xl text-gray-400 italic">
             {movie.year} | {movie.rating}
           </p>
         </div>
-        <div className="bg-gray-700 p-4 sm:p-6 rounded-lg shadow-sm w-full mt-4 font-karma relative">
+        <div className="bg-gray-800 p-4 rounded-lg w-full mt-4 font-karma relative">
           <div className="flex flex-col mb-3">
             <p className="text-gray-200">
               <span className="font-bold text-xl">Actors:</span>{' '}
@@ -116,6 +118,7 @@ function FilmInfo() {
               className={`text-xl mt-3 bg-transparent ${isBookmarked ? 'text-yellow-500' : 'text-gray-300'} transition-all`}
               aria-label={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
             >
+              {/*responsive,mobilefriendly */}
               <i
                 className={isBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark'}
               ></i>
