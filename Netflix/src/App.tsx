@@ -2,8 +2,7 @@ import './App.css';
 import { useNavigate } from 'react-router-dom';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
-import Carousel from './components/carousel/Carousel';
-import movies from './movies/movies.json';
+import Trending from './components/trending/Trending';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -19,7 +18,7 @@ function App() {
         <Header />
         <section className="h-full w-full">
           <h1>Trending</h1>
-          <Carousel data={movies} />
+          <Trending />
           <section>
             <h1>Recommended</h1>
           </section>

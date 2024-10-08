@@ -44,7 +44,7 @@ function Carousel({ data }: CarouselProps) {
             <img
               src={movie.thumbnail}
               alt={movie.title}
-              className="w-full h-[90%] object-contain rounded-lg shadow-md hover:cursor-pointer"
+              className="w-full h-[90%] object-contain rounded-lg shadow-md"
               onClick={() => handleNavigateToFilmInfo(movie.title)}
             />
             <section className="h-[35px] w-[95%] flex justify-between items-center">
