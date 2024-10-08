@@ -22,7 +22,7 @@ function App() {
           <Trending />
           <section>
             <h1>Recommended</h1>
-            <Recommended/>
+            <Recommended />
           </section>
           <section>
             <h1>Bookmarks</h1>
