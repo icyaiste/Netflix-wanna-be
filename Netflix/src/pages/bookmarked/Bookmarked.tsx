@@ -12,7 +12,7 @@ function Bookmarked() {
       <Header />
       <div>
         <h1>Bookmarks</h1>
-        <Carousel data={faves} />
+        <Carousel data={faves} labelledBy="bookmarked-carousel" />
       </div>
       <Footer />
     </div>
