@@ -2,19 +2,35 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Header from '../components/header/Header';
 import { MemoryRouter } from 'react-router-dom';
-import { test, expect, beforeEach } from 'vitest';
-// import { createMemoryHistory } from 'history';
-// import { Router } from 'react-router-dom';
+import { test, expect } from 'vitest';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
-beforeEach(() => {
+const mockMovies = [
+  {
+    title: 'Seven Samurai',
+    year: 1954,
+    rating: 'Not Rated'
+  },
+  {
+    title: "The Godfather",
+    year: 1972,
+    rating: "R",
+  },
+  {
+    title: "The Dark Knight",
+    year: 2008,
+    rating: "PG-13",
+  }
+]
+
+test('it should show what user is typing in the search field', async () => {
   render(
     <MemoryRouter>
       <Header />
     </MemoryRouter>,
   );
-});
-
-test('it should show what user is typing in the search field', async () => {
+  
   const user = userEvent.setup();
   const input = screen.getByRole('searchbox');
 
@@ -23,44 +39,64 @@ test('it should show what user is typing in the search field', async () => {
   expect(input).toHaveValue('hello'); // output "hello"
 });
 
-// test('it should show me movies in the searchbar through the fuzzy search method', async () => {
-// });
+test('it should show me movies in the searchbar through the fuzzy search method', async () => {
+  const user = userEvent.setup();
+  render(
+    <MemoryRouter>
+      <Header />
+    </MemoryRouter>,
+  );
 
-// test('it should let me go into a filmpage through the click of the "Learn more" button', async () => {
-//   const user = userEvent.setup();
-//   const history = createMemoryHistory();
-//   render(
-//     <Router location={history.location} navigator={history}>
-//       <Header />
-//     </Router>
-//   );
+  const input = screen.getByRole('searchbox');
+  user.type(input, 'The Godfather');
+});
 
-//   // Find the button by its visible text
-//   const learnMoreButton = await screen.findByText(/learn more/i);
+test('it should let me go into a filmpage through the click of the "Learn more" button', async () => {
+  const user = userEvent.setup();
+  const history = createMemoryHistory();
+  render(
+    <Router location={history.location} navigator={history}>
+      <Header />
+    </Router>
+  );
+  // Simulate searching for the movie
+  const input = screen.getByPlaceholderText('Search');
 
-//   // Simulate clicking the "Learn more" button
-//   await user.click(learnMoreButton);
+  await user.type(input, 'Seven Samurai');
 
-//   expect(history.location.pathname).toBe('/info/:title')
-// });
+    // Find the button by its label text
+  const learnMoreButton = await screen.findByLabelText('learn-more-button');
 
-// test('it should navigate to the Categories page when the Categories button is clicked', async () => {
-//   const user = userEvent.setup();
-//   const history = createMemoryHistory();
-//   render(
-//     <Router location={history.location} navigator={history}>
-//       <Header />
-//     </Router>
-//   );
+  // Simulate clicking the button
+  await user.click(learnMoreButton);
 
-//   const categoriesButton = screen.getByLabelText('Categories Header');
-//   await user.click(categoriesButton);
+  expect(history.location.pathname).toBe('/info/Seven Samurai')
 
-//   expect(history.location.pathname).toBe('/categories');
-// });
+});
+
+test('it should navigate to the Categories page when the Categories button is clicked', async () => {
+  const user = userEvent.setup();
+  const history = createMemoryHistory();
+  render(
+    <Router location={history.location} navigator={history}>
+      <Header />
+    </Router>
+  );
+
+  const categoriesButton = screen.getByLabelText('Categories Header');
+  await user.click(categoriesButton);
+
+  expect(history.location.pathname).toBe('/categories');
+});
 
 test('it should let me open the dropdown nav menu', async () => {
   const user = userEvent.setup();
+  render(
+    <MemoryRouter>
+      <Header />
+    </MemoryRouter>,
+  );
+
   const navIcon = screen.getByLabelText('icon');
 
   await user.click(navIcon);
@@ -71,6 +107,11 @@ test('it should let me open the dropdown nav menu', async () => {
 
 test('it should close the dropdown when clicking the icon again', async () => {
   const user = userEvent.setup();
+  render(
+    <MemoryRouter>
+      <Header />
+    </MemoryRouter>,
+  );
 
   // Open the dropdown by clicking the icon
   const navIcon = screen.getByLabelText('icon');
@@ -88,7 +129,4 @@ test('it should close the dropdown when clicking the icon again', async () => {
 
   // If the dropdown is removed from the DOM:
   expect(dropdownAfterClose).toHaveClass('opacity-0', 'scale-y-0');
-
-  // If the dropdown is hidden using CSS (still in the DOM, but not visible):
-  // expect(dropdownMenu).not.toBeVisible();
 });
