@@ -7,10 +7,10 @@ import { useBookmarks } from '../../context/BookmarkContext';
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
-  const { faves, setFaves } = useBookmarks(); 
+  const { faves, setFaves } = useBookmarks();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
-  const isBookmarked = faves.some((fave) => fave.title === title); 
+  const isBookmarked = faves.some((fave) => fave.title === title);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -19,12 +19,12 @@ function FilmInfo() {
         const res = await import('../../movies/movies.json');
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
-         //hitta filmen med den aktuella title
+        //hitta filmen med den aktuella title
         const foundMovie = movies.find((movie) => movie.title === title);
         console.log('thats the title:', title);
         //om hittar filmen
         if (foundMovie) {
-            //säta filmen i state
+          //säta filmen i state
           setMovie(foundMovie);
         }
       } catch (error) {
@@ -37,7 +37,7 @@ function FilmInfo() {
   }, [title]);
 
   const toggleBookmark = () => {
-     //kolla om filmen  är bookmarked
+    //kolla om filmen  är bookmarked
     if (isBookmarked) {
       console.log('Removed bookmark');
       const updatedFaves = faves.filter((fave) => fave.title !== title);
@@ -80,13 +80,15 @@ function FilmInfo() {
         <div className="bg-gray-700 p-4 sm:p-6 rounded-lg shadow-sm w-full mt-4 font-karma relative">
           <div className="flex flex-col mb-3">
             <p className="text-gray-200">
-              <span className="font-bold text-xl">Actors:</span> {movie.actors.join(', ')}
+              <span className="font-bold text-xl">Actors:</span>{' '}
+              {movie.actors.join(', ')}
             </p>
             <p className="text-gray-200">
               <span className="font-bold text-xl">Genre:</span> {movie.genre}
             </p>
             <p className="text-gray-200 mb-6">
-              <span className="font-bold text-xl">Synopsis:</span> {movie.synopsis}
+              <span className="font-bold text-xl">Synopsis:</span>{' '}
+              {movie.synopsis}
             </p>
           </div>
 
@@ -96,7 +98,9 @@ function FilmInfo() {
               className={`text-xl mt-3 bg-transparent ${isBookmarked ? 'text-yellow-500' : 'text-gray-300'} transition-all`}
               aria-label={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
             >
-              <i className={isBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark'}></i>
+              <i
+                className={isBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark'}
+              ></i>
             </button>
           </div>
         </div>

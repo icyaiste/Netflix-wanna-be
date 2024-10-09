@@ -12,12 +12,12 @@ const bookmarkContext = createContext<bookmarkContextInterface>(null!);
 
 function BookmarkProvider({ children }: { children: ReactNode }) {
   const [faves, setFaves] = useState<Movie[]>([]);
-    //   console.log(faves);
+  //   console.log(faves);
 
   // Fetches localStorage faves on site load
   useEffect(() => {
-      console.log('fetching favorites');
-      const storedFaves = localStorage.getItem('faves');
+    console.log('fetching favorites');
+    const storedFaves = localStorage.getItem('faves');
     if (storedFaves) {
       try {
         const parsedFaves = JSON.parse(storedFaves);
@@ -27,7 +27,6 @@ function BookmarkProvider({ children }: { children: ReactNode }) {
       }
     }
   }, []);
-
 
   return (
     <>

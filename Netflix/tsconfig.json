@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["vitest/globals", "@testing-library/jest-dom",  "msw"]
+    "types": ["vitest/globals", "@testing-library/jest-dom", "msw"]
   },
   "files": [],
   "references": [
