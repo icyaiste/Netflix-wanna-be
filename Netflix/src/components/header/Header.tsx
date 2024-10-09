@@ -68,7 +68,7 @@ export default function Header() {
         {/* Dropdown Menu */}
         <div
           aria-label="dropdown"
-          className={`absolute left-0 mt-2 w-48 bg-red-700 border border-black rounded-lg shadow-lg transition-all duration-100 ease-in-out origin-top transform ${
+          className={`z-[1] absolute left-0 mt-2 w-48 bg-red-700 border border-black rounded-lg shadow-lg transition-all duration-100 ease-in-out origin-top transform ${
             isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}
           style={{ transformOrigin: 'top' }}
@@ -106,7 +106,7 @@ export default function Header() {
         <ul>
           {/* Conditionally render <ul> only if query is not empty and there are matching movies */}
           {query && searchedMovies.length > 0 && (
-            <ul className="absolute bg-black border-white border rounded-lg justify-center mt-2 p-2 w-[54rem] flex flex-wrap">
+            <ul className="z-[1] absolute bg-black border-white border rounded-lg justify-center mt-2 p-2 w-[54rem] flex flex-wrap">
               {searchedMovies.map((movie) => (
                 <div
                   className="border rounded border-white bg-red-800 p-2 flex flex-col place-items-center m-2 w-[16rem]"
