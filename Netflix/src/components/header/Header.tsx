@@ -93,16 +93,16 @@ export default function Header() {
           </ul>
         </div>
       </div>
-  
+
       {/* Logo Section */}
       <div className="flex justify-center md:justify-start md:order-2 w-full md:w-auto">
-        <img 
-          src={NotflixLogo} 
+        <img
+          src={NotflixLogo}
           alt="Notflix Logo"
           className="w-[18rem] h-auto md:w-[20rem]" // Adjusted size for mobile and larger screens
         />
       </div>
-  
+
       {/* Search Box */}
       <section className="w-full md:w-auto mt-4 md:mt-0 md:order-3">
         <input
@@ -125,7 +125,9 @@ export default function Header() {
                     src={movie.thumbnail}
                     alt={movie.title}
                   />
-                  <p className="text-xl">{movie.year} / {movie.rating}</p>
+                  <p className="text-xl">
+                    {movie.year} / {movie.rating}
+                  </p>
                   <article>
                     <p className="text-white-600">{movie.title}</p>
                     <p className="text-green-200">{movie.genre}</p>
@@ -148,7 +150,7 @@ export default function Header() {
               ))}
             </ul>
           )}
-  
+
           {query && searchedMovies.length === 0 && (
             <ul className="absolute bg-black border-red-600 rounded-lg mt-2 p-2">
               <li>No movies found</li>
@@ -156,7 +158,7 @@ export default function Header() {
           )}
         </ul>
       </section>
-  
+
       {/* Navigation Links */}
       <section className="flex space-x-4 mt-4 md:mt-0 md:order-4">
         <h2
@@ -181,4 +183,4 @@ export default function Header() {
       </section>
     </section>
   );
-}  
+}
