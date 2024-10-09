@@ -1,6 +1,5 @@
 import Carousel from '../components/carousel/Carousel';
 import { render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/react';
 import movies from '../movies/movies.json';
 import { test, expect, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
