@@ -66,7 +66,7 @@ export default function Header() {
         {/* Dropdown Menu */}
         <div
           aria-label="dropdown"
-          className={`z-[1] absolute left-0 mt-2 w-48 bg-red-700 border border-black rounded-lg shadow-lg transition-all duration-100 ease-in-out origin-top transform ${
+          className={`z-[1] absolute left-20 mt-20 bg-red-700 border border-black rounded-lg shadow-lg transition-all duration-100 ease-in-out origin-top transform ${
             isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}
           style={{ transformOrigin: 'top' }}
