@@ -1,5 +1,4 @@
 import Header from '../../components/header/Header';
-// import Carousel from '../../components/carousel/Carousel';
 import Footer from '../../components/footer/Footer';
 import Bookmark from '../../components/bookmark/Bookmark';
 import { useBookmarks } from '../../context/BookmarkContext';
