@@ -133,7 +133,7 @@ export default function Header() {
                   </article>
                   <section className="flex place-items-center">
                     <button
-                      aria-label="learn-more-button"
+                      aria-label='learn-more-button'
                       onClick={() => handleNavigateToFilmInfo(movie.title)}
                       className="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 px-4 m-1 border border-gray-400 rounded shadow"
                     >
