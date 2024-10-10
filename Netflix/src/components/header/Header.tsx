@@ -130,7 +130,7 @@ export default function Header() {
                       src={BookmarkEmpty}
                     />
                     <button
-                      aria-label='learn-more-button'
+                      aria-label="learn-more-button"
                       onClick={() => handleNavigateToFilmInfo(movie.title)}
                       className="text-center m-1 text-sm bg-blue-600"
                     >

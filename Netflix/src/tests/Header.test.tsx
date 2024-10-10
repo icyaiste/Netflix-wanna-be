@@ -10,19 +10,19 @@ const mockMovies = [
   {
     title: 'Seven Samurai',
     year: 1954,
-    rating: 'Not Rated'
+    rating: 'Not Rated',
   },
   {
-    title: "The Godfather",
+    title: 'The Godfather',
     year: 1972,
-    rating: "R",
+    rating: 'R',
   },
   {
-    title: "The Dark Knight",
+    title: 'The Dark Knight',
     year: 2008,
-    rating: "PG-13",
-  }
-]
+    rating: 'PG-13',
+  },
+];
 
 test('it should show what user is typing in the search field', async () => {
   render(
@@ -30,7 +30,7 @@ test('it should show what user is typing in the search field', async () => {
       <Header />
     </MemoryRouter>,
   );
-  
+
   const user = userEvent.setup();
   const input = screen.getByRole('searchbox');
 
@@ -49,6 +49,54 @@ test('it should show me movies in the searchbar through the fuzzy search method'
 
   const input = screen.getByRole('searchbox');
   user.type(input, 'The Godfather');
+
+  await screen.findByText('The Godfather');
+
+  const searchResults = screen.getAllByRole('listitem');
+  expect(searchResults).toHaveLength(1);
+  expect(searchResults[0]).toHaveTextContent('The Godfather');
+});
+
+test('it should show me multiple movies in the searchbar through the fuzzy search method', async () => {
+  const user = userEvent.setup();
+  render(
+    <MemoryRouter>
+      <Header />
+    </MemoryRouter>,
+  );
+
+  const input = screen.getByRole('searchbox');
+  user.type(input, 'the');
+
+  // Wait for the search results to appear
+  await screen.findByText('The Godfather');
+
+  // Check that the search results are correct
+  const searchResults = screen.getAllByRole('listitem');
+  expect(searchResults).toHaveLength(2);
+  expect(searchResults[0]).toHaveTextContent('The Godfather');
+  expect(searchResults[1]).toHaveTextContent('The Dark Knight');
+});
+
+test('it should not show me movies that do not match the search query', async () => {
+  const user = userEvent.setup();
+  render(
+    <MemoryRouter>
+      <Header />
+    </MemoryRouter>,
+  );
+
+  const input = screen.getByRole('searchbox');
+  user.type(input, 'Seven');
+
+  // Wait for the search results to appear
+  await screen.findByText('Seven Samurai');
+
+  // Check that the search results are correct
+  const searchResults = screen.getAllByRole('listitem');
+  expect(searchResults).toHaveLength(1);
+  expect(searchResults[0]).toHaveTextContent('Seven Samurai');
+  expect(screen.queryByText('The Godfather')).not.toBeInTheDocument();
 });
 
 test('it should let me go into a filmpage through the click of the "Learn more" button', async () => {
@@ -57,21 +105,20 @@ test('it should let me go into a filmpage through the click of the "Learn more" 
   render(
     <Router location={history.location} navigator={history}>
       <Header />
-    </Router>
+    </Router>,
   );
   // Simulate searching for the movie
   const input = screen.getByPlaceholderText('Search');
 
   await user.type(input, 'Seven Samurai');
 
-    // Find the button by its label text
+  // Find the button by its label text
   const learnMoreButton = await screen.findByLabelText('learn-more-button');
 
   // Simulate clicking the button
   await user.click(learnMoreButton);
 
-  expect(history.location.pathname).toBe('/info/Seven Samurai')
-
+  expect(history.location.pathname).toBe('/info/Seven Samurai');
 });
 
 test('it should navigate to the Categories page when the Categories button is clicked', async () => {
@@ -80,7 +127,7 @@ test('it should navigate to the Categories page when the Categories button is cl
   render(
     <Router location={history.location} navigator={history}>
       <Header />
-    </Router>
+    </Router>,
   );
 
   const categoriesButton = screen.getByLabelText('Categories Header');
