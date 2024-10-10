@@ -39,7 +39,7 @@
   {
     "title": "12 Angry Men",
     "year": 1957,
-    "rating": "Not Rated",
+    "rating": "-",
     "actors": ["Henry Fonda", "Lee J. Cobb", "Martin Balsam"],
     "genre": "Crime, Drama",
     "synopsis": "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
@@ -76,7 +76,7 @@
   {
     "title": "The Good, the Bad and the Ugly",
     "year": 1966,
-    "rating": "Not Rated",
+    "rating": "-",
     "actors": ["Clint Eastwood", "Lee Van Cleef", "Eli Wallach"],
     "genre": "Western",
     "synopsis": "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
@@ -159,7 +159,7 @@
   {
     "title": "Seven Samurai",
     "year": 1954,
-    "rating": "Not Rated",
+    "rating": "-",
     "actors": ["Toshiro Mifune", "Takashi Shimura", "Keiko Tsushima"],
     "genre": "Action, Adventure, Drama",
     "synopsis": "Farmers from a village exploited by bandits hire a veteran samurai for protection, who gathers six other samurai to join him.",
