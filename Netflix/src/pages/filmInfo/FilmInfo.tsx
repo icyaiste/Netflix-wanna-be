@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import { Movie } from '../../interfaces/Interfaces';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
+import { useBookmarks } from '../../context/BookmarkContext';
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
-  console.log('Retrieved title from URL:', title);
+  const { faves, setFaves } = useBookmarks();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const isBookmarked = faves.some((fave) => fave.title === title);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -19,7 +19,6 @@ function FilmInfo() {
         const res = await import('../../movies/movies.json');
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
-        console.log('movie:', movies);
         //hitta filmen med den aktuella title
         const foundMovie = movies.find((movie) => movie.title === title);
         console.log('thats the title:', title);
@@ -27,12 +26,6 @@ function FilmInfo() {
         if (foundMovie) {
           //säta filmen i state
           setMovie(foundMovie);
-          //hämta bookmarked filmer från local storage eller  en tom array om inga filmer finns
-          const bookmarks = JSON.parse(
-            localStorage.getItem('bookmarkedMovies') || '[]',
-          );
-          //kolla om den hittade filmen är redan bookmarked
-          setIsBookmarked(bookmarks.includes(foundMovie.title));
         }
       } catch (error) {
         console.error('Error loading movies:', error);
@@ -44,30 +37,19 @@ function FilmInfo() {
   }, [title]);
 
   const toggleBookmark = () => {
-    //toogle the bookmark status för filmen
-    setIsBookmarked((prev) => !prev);
-    //hämta bookmarked filmer från local storage eller  en tom array om inga filmer finns
-    const bookmarks = JSON.parse(
-      localStorage.getItem('bookmarkedMovies') || '[]',
-    );
     //kolla om filmen  är bookmarked
     if (isBookmarked) {
-      //skapa list med bookmarked filmer ,genom att filtera bort title som är valt
-      const updatedBookmarks = bookmarks.filter(
-        //behålla titlar som är inte lika med den valtfilmen
-        (bookmarkedTitle: string) => bookmarkedTitle !== movie?.title,
-      );
-      //local storage uppdateras med dem nya filmerna
-      localStorage.setItem(
-        'bookmarkedMovies',
-        JSON.stringify(updatedBookmarks),
-      );
+      console.log('Removed bookmark');
+      const updatedFaves = faves.filter((fave) => fave.title !== title);
+      setFaves(updatedFaves);
     } else {
-      //om filmen inte bookmarked  lägga till filmen i bookmarked filmer
-      bookmarks.push(movie?.title);
-      //local storage uppdateras med listan som inkluderar den bookmarked filmen
-      localStorage.setItem('bookmarkedMovies', JSON.stringify(bookmarks));
+      console.log('Added bookmark');
+      if (movie) {
+        setFaves((prevFaves) => [...prevFaves, movie]);
+      }
     }
+    // local storage uppdateras med favoriter filmer i listan
+    localStorage.setItem('faves', JSON.stringify(faves));
   };
 
   if (loading) {
