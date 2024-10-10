@@ -75,7 +75,7 @@ function FilmInfo() {
               {movie.synopsis}
             </p>
           </div>
-          <Bookmark movie={movie} />
+          <Bookmark movie = {movie}/>
         </div>
       </div>
       <Footer />
