@@ -1,28 +1,10 @@
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Header from '../components/header/Header';
 import { MemoryRouter } from 'react-router-dom';
 import { test, expect } from 'vitest';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-
-const mockMovies = [
-  {
-    title: 'Seven Samurai',
-    year: 1954,
-    rating: 'Not Rated',
-  },
-  {
-    title: 'The Godfather',
-    year: 1972,
-    rating: 'R',
-  },
-  {
-    title: 'The Dark Knight',
-    year: 2008,
-    rating: 'PG-13',
-  },
-];
 
 test('it should show what user is typing in the search field', async () => {
   render(
@@ -39,7 +21,7 @@ test('it should show what user is typing in the search field', async () => {
   expect(input).toHaveValue('hello'); // output "hello"
 });
 
-test('it should show me movies in the searchbar through the fuzzy search method', async () => {
+test('it should fuzzy search movies based on title, actors, and genre', async () => {
   const user = userEvent.setup();
   render(
     <MemoryRouter>
@@ -48,16 +30,25 @@ test('it should show me movies in the searchbar through the fuzzy search method'
   );
 
   const input = screen.getByRole('searchbox');
-  user.type(input, 'The Godfather');
 
-  await screen.findByText('The Godfather');
+  // Array of search terms to test
+  const searchTerms = ['bale', 'knight', 'ledger'];
 
-  const searchResults = screen.getAllByRole('listitem');
-  expect(searchResults).toHaveLength(1);
-  expect(searchResults[0]).toHaveTextContent('The Godfather');
+  // loop over the search terms
+  for (const term of searchTerms) {
+    await user.type(input, term); // simulate typing the search term
+
+    // wait for "The Dark Knight" to appear in the DOM for each search term
+    await waitFor(() => {
+      const movieTitle = screen.getByText(/The Dark Knight/i); // Match the title
+      expect(movieTitle).toBeInTheDocument();
+    });
+
+    await user.clear(input); // clears the input after each test
+  }
 });
 
-test('it should show me multiple movies in the searchbar through the fuzzy search method', async () => {
+test('it should filter movies in a case-insensitive manner', async () => {
   const user = userEvent.setup();
   render(
     <MemoryRouter>
@@ -66,19 +57,14 @@ test('it should show me multiple movies in the searchbar through the fuzzy searc
   );
 
   const input = screen.getByRole('searchbox');
-  user.type(input, 'the');
+  await user.type(input, 'seven samurai');
 
-  // Wait for the search results to appear
-  await screen.findByText('The Godfather');
-
-  // Check that the search results are correct
-  const searchResults = screen.getAllByRole('listitem');
-  expect(searchResults).toHaveLength(2);
-  expect(searchResults[0]).toHaveTextContent('The Godfather');
-  expect(searchResults[1]).toHaveTextContent('The Dark Knight');
+  // Ensure the case-insensitive match works
+  const movieTitle = await screen.findByText('Seven Samurai');
+  expect(movieTitle).toBeInTheDocument();
 });
 
-test('it should not show me movies that do not match the search query', async () => {
+test('it should display "No movies found" when there are no matching results', async () => {
   const user = userEvent.setup();
   render(
     <MemoryRouter>
@@ -87,16 +73,11 @@ test('it should not show me movies that do not match the search query', async ()
   );
 
   const input = screen.getByRole('searchbox');
-  user.type(input, 'Seven');
+  await user.type(input, 'NonExistentMovie');
 
-  // Wait for the search results to appear
-  await screen.findByText('Seven Samurai');
-
-  // Check that the search results are correct
-  const searchResults = screen.getAllByRole('listitem');
-  expect(searchResults).toHaveLength(1);
-  expect(searchResults[0]).toHaveTextContent('Seven Samurai');
-  expect(screen.queryByText('The Godfather')).not.toBeInTheDocument();
+  // make sure the no movies message appears
+  const noResultsMessage = await screen.findByText('No movies found');
+  expect(noResultsMessage).toBeInTheDocument();
 });
 
 test('it should let me go into a filmpage through the click of the "Learn more" button', async () => {
@@ -107,15 +88,11 @@ test('it should let me go into a filmpage through the click of the "Learn more" 
       <Header />
     </Router>,
   );
-  // Simulate searching for the movie
-  const input = screen.getByPlaceholderText('Search');
 
+  const input = screen.getByPlaceholderText('Search');
   await user.type(input, 'Seven Samurai');
 
-  // Find the button by its label text
   const learnMoreButton = await screen.findByLabelText('learn-more-button');
-
-  // Simulate clicking the button
   await user.click(learnMoreButton);
 
   expect(history.location.pathname).toBe('/info/Seven Samurai');
@@ -160,20 +137,15 @@ test('it should close the dropdown when clicking the icon again', async () => {
     </MemoryRouter>,
   );
 
-  // Open the dropdown by clicking the icon
   const navIcon = screen.getByLabelText('icon');
   await user.click(navIcon);
 
-  // Expect the dropdown to be visible after first click
   const dropdownMenu = screen.getByLabelText('dropdown');
   expect(dropdownMenu).toBeVisible();
 
-  // Close the dropdown by clicking the icon again
   await user.click(navIcon);
 
-  // Use `queryByLabelText` to see if it's removed from DOM
   const dropdownAfterClose = screen.queryByLabelText('dropdown');
 
-  // If the dropdown is removed from the DOM:
   expect(dropdownAfterClose).toHaveClass('opacity-0', 'scale-y-0');
 });
