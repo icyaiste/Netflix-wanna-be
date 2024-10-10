@@ -3,14 +3,12 @@ import { useParams } from 'react-router-dom';
 import { Movie } from '../../interfaces/Interfaces';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import { useBookmarks } from '../../context/BookmarkContext';
+import Bookmark from '../../components/bookmark/Bookmark';
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
-  const { faves, setFaves } = useBookmarks();
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
-  const isBookmarked = faves.some((fave) => fave.title === title);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -35,22 +33,6 @@ function FilmInfo() {
     };
     loadMovies();
   }, [title]);
-
-  const toggleBookmark = () => {
-    //kolla om filmen  är bookmarked
-    if (isBookmarked) {
-      console.log('Removed bookmark');
-      const updatedFaves = faves.filter((fave) => fave.title !== title);
-      setFaves(updatedFaves);
-    } else {
-      console.log('Added bookmark');
-      if (movie) {
-        setFaves((prevFaves) => [...prevFaves, movie]);
-      }
-    }
-    // local storage uppdateras med favoriter filmer i listan
-    localStorage.setItem('faves', JSON.stringify(faves));
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -93,19 +75,7 @@ function FilmInfo() {
               {movie.synopsis}
             </p>
           </div>
-
-          <div className="absolute bottom-2 right-2">
-            <button
-              onClick={toggleBookmark}
-              className={`text-xl mt-3 bg-transparent ${isBookmarked ? 'text-yellow-500' : 'text-gray-300'} transition-all`}
-              aria-label={isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'}
-            >
-              {/*responsive,mobilefriendly */}
-              <i
-                className={isBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark'}
-              ></i>
-            </button>
-          </div>
+          <Bookmark movie={movie} />
         </div>
       </div>
       <Footer />
