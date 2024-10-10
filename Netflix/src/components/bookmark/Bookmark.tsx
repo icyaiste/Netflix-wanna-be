@@ -4,7 +4,7 @@ import { useBookmarks } from '../../context/BookmarkContext';
 
 function Bookmark({ movie }: BookmarkProps) {
   const { faves, setFaves } = useBookmarks();
-
+  const isFavorite = faves.includes(movie)
   //every time state updates push into local storage
   useEffect(() => {
     try {
@@ -15,30 +15,31 @@ function Bookmark({ movie }: BookmarkProps) {
   }, [faves]);
 
   //when button gets clicked update state
-  function mark() {
+  function toggleBookmark() {
     const isFavorite = faves.some((fave) => fave.title === movie.title);
 
     if (isFavorite) {
       // Remove the movie from favorites if it's already a favorite
-      console.log('removed bookmark');
       const newArray = faves.filter((fave) => fave.title !== movie.title);
 
       setFaves(newArray);
     } else {
       // Add the movie to favorites
-      console.log('added bookmark');
       setFaves((prevFaves) => [...prevFaves, movie]);
     }
   }
 
   //button
   return (
-    <div>
+    <div className="absolute bottom--1 right-2">
       <button
-        className="text-sm sm:text-md p-2 sm:p-3 bg-gray-200 hover:bg-gray-300 rounded-lg shadow-md focus:outline-none"
-        onClick={mark}
+        onClick={toggleBookmark}
+        className={`text-xl bg-transparent ${isFavorite ? 'text-yellow-500' : 'text-gray-300'} transition-all`}
+        aria-label={isFavorite ? 'Remove Bookmark' : 'Add Bookmark'}
       >
-        *
+        <i
+          className={isFavorite ? 'fas fa-bookmark' : 'far fa-bookmark'}
+        ></i>
       </button>
     </div>
   );

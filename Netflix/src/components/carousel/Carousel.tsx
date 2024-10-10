@@ -43,22 +43,22 @@ function Carousel({ data, labelledBy }: CarouselProps) {
           {data.map((movie, index) => (
             <div
               key={index}
-              className="flex-col flex-shrink-0 w-[225px] h-[330px] p-[7px]"
+              className="flex-col flex-shrink-0 w-[225px] h-[330px] p-[7px] relative"
             >
-              <Bookmark movie={movie} />
               <img
                 src={movie.thumbnail}
                 alt={movie.title}
                 className="w-full h-[90%] object-contain rounded-lg shadow-md"
                 onClick={() => handleNavigateToFilmInfo(movie.title)}
               />
-              <section className="h-[35px] w-[95%] flex justify-between items-center">
+              <section className="h-[35px] w-[95%] flex justify-between items-center ml-2">
                 <p className="ml-2 text-red-600 text-xl font-medium justify-self-start">
                   {movie.rating}
                 </p>
                 <h2 className=" text-xl font-semibold w-[50px] mr-[35%]">
                   {movie.year}
                 </h2>
+                <Bookmark movie={movie} />
               </section>
             </div>
           ))}
