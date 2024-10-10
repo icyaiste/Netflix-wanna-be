@@ -12,7 +12,7 @@ test('it should show what user is typing in the search field', async () => {
       <Header />
     </MemoryRouter>,
   );
-  
+
   const user = userEvent.setup();
   const input = screen.getByRole('searchbox');
 
@@ -86,7 +86,7 @@ test('it should let me go into a filmpage through the click of the "Learn more" 
   render(
     <Router location={history.location} navigator={history}>
       <Header />
-    </Router>
+    </Router>,
   );
 
   const input = screen.getByPlaceholderText('Search');
@@ -95,8 +95,7 @@ test('it should let me go into a filmpage through the click of the "Learn more" 
   const learnMoreButton = await screen.findByLabelText('learn-more-button');
   await user.click(learnMoreButton);
 
-  expect(history.location.pathname).toBe('/info/Seven Samurai')
-
+  expect(history.location.pathname).toBe('/info/Seven Samurai');
 });
 
 test('it should navigate to the Categories page when the Categories button is clicked', async () => {
@@ -105,7 +104,7 @@ test('it should navigate to the Categories page when the Categories button is cl
   render(
     <Router location={history.location} navigator={history}>
       <Header />
-    </Router>
+    </Router>,
   );
 
   const categoriesButton = screen.getByLabelText('Categories Header');
