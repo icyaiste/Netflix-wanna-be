@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DropdownIcon from '../../assets/menu-icon-white-2.jpg';
 import NotflixLogo from '../../assets/notflix.webp';
-import BookmarkEmpty from '../../assets/bookmark-empty.jpg';
 // import BookmarkFull from "../../assets/bookmark-full.webp";
 import films from '../../movies/movies.json';
 import Fuse from 'fuse.js';
@@ -133,15 +132,10 @@ export default function Header() {
                     <p className="text-green-200">{movie.genre}</p>
                   </article>
                   <section className="flex place-items-center">
-                    <img
-                      className="w-[2rem] h-[2rem] m-1"
-                      src={BookmarkEmpty}
-                      alt="Bookmark Icon"
-                    />
                     <button
                       role="button"
                       onClick={() => handleNavigateToFilmInfo(movie.title)}
-                      className="text-center m-1 text-sm bg-blue-600 p-1"
+                      className="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 px-4 m-1 border border-gray-400 rounded shadow"
                     >
                       Learn more
                     </button>
