@@ -34,7 +34,12 @@ function Bookmark({ movie }: BookmarkProps) {
   //button
   return (
     <div>
-      <button onClick={mark}>*</button>
+      <button
+        className="text-sm sm:text-md p-2 sm:p-3 bg-gray-200 hover:bg-gray-300 rounded-lg shadow-md focus:outline-none"
+        onClick={mark}
+      >
+        *
+      </button>
     </div>
   );
 }

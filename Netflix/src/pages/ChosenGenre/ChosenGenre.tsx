@@ -20,22 +20,25 @@ const ChosenGenre = () => {
   return (
     <div>
       <Header />
-      <h1 className="text-4xl font-bold text-center mb-10">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10">
         {selectedGenre} Movies
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
+        {/*responsive,mobilefriendly */}
         {filteredMovies.map((movie) => (
           <div
             key={movie.title}
-            className="h-100% sm:h-500% w-100% bg-cover bg-center pb-20 rhadow-xl text-black hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
+            className="relative bg-cover bg-center rounded-lg shadow-lg hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
             onClick={() => handleNavigateToFilmInfo(movie.title)}
           >
             <img
               src={movie.thumbnail}
               alt={movie.title}
-              className="h-full w-full object-cover rounded-lg"
+              className="h-64 w-full object-cover rounded-t-lg"
             />
-            <h2 className="text-center text-xl font-bold">{movie.title}</h2>
+            <h2 className="text-center text-lg sm:text-xl font-bold mt-2">
+              {movie.title}
+            </h2>
             <hr className="border-gray-500" />
           </div>
         ))}
@@ -44,5 +47,4 @@ const ChosenGenre = () => {
     </div>
   );
 };
-
 export default ChosenGenre;
