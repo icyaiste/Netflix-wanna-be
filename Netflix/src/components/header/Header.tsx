@@ -52,7 +52,7 @@ export default function Header() {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between w-full p-4 bg-black rounded-lg">
+    <section className="flex flex-col md:flex-row items-center justify-between w-full p-4 bg-black">
       {/* Hamburger Menu */}
       <div className="relative md:order-1 flex md:flex-none items-center m-2">
         <img
