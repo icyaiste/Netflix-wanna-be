@@ -1,4 +1,4 @@
-import userEvent from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@testing-library/react';
 import Header from '../components/header/Header';
 import { MemoryRouter } from 'react-router-dom';

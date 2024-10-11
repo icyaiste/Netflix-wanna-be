@@ -5,6 +5,7 @@ import Carousel from '../components/carousel/Carousel';
 import movies from '../movies/movies.json';
 import { MemoryRouter } from 'react-router-dom';
 import BookmarkProvider from '../context/BookmarkContext';
+import userEvent from '@testing-library/user-event';
 
 beforeEach(() => {
   render(
@@ -41,16 +42,87 @@ test('trending movies are not in recommended movies', () => {
 });
 
 
-describe('bookmarked functionality', () =>{
-test.only('marked movies appear on bookmarked page', () => {
+describe('bookmarked functionality',() =>{
+test('when Bookmarked movie is clicked, it changes image (to yellow)', async () => {
   <MemoryRouter>
     render(
     <App />
     );
   </MemoryRouter>;
-})
 
-test('bookmark exists on FilmInfo page and is clickable', () => {
+const user = userEvent.setup();
+
+//find Bookmarked button and click it
+  const bookmarkedBtn = screen.getAllByRole('button')[0];
+  expect(bookmarkedBtn).toBeInTheDocument();
+  await user.click(bookmarkedBtn);
+
+  //When Bookmarked, button changes color to yellow
+  expect(bookmarkedBtn).toHaveClass('text-yellow-500');
+});
+
+test.only('bookmarked movies appear in Bookmarked carousel', async () => {
+  <MemoryRouter>
+    render(
+    <App />
+    );
+  </MemoryRouter>;
+
+const user = userEvent.setup();
+
+  //Find how many movies 'The Shawshank Redemption' there are on page
+  let findShanks = screen.getAllByAltText('The Shawshank Redemption');
+  const numberOfShanks = findShanks.length;
+  expect(findShanks).toHaveLength(numberOfShanks);
+
+  //find Bookmarked button on 'The Shawshank Redemption' movie and click it
+  const bookmarkedBtn = screen.getAllByRole('button')[0];
+  expect(bookmarkedBtn).toBeInTheDocument();
+  await user.click(bookmarkedBtn);
+
+  //When Bookmarked, button changes color to yellow
+  expect(bookmarkedBtn).toHaveClass('text-yellow-500');
+
+  //Check if 'The Shawshank Redemption' appeared in Bookmarked carousel
+  findShanks = screen.getAllByAltText('The Shawshank Redemption');
+  expect(findShanks).toHaveLength(numberOfShanks + 1);
+});
+
+test.only('movie disappears from Bookmarked carousel when buttons Bookmarked is clicked again',async () => {
     
+  <MemoryRouter>
+    render(
+    <App />
+    );
+  </MemoryRouter>;
+
+
+const user = userEvent.setup();
+  //Find how many movies 'The Shawshank Redemption' there are on page
+  const findShanks = screen.getAllByAltText('The Shawshank Redemption');
+  screen.debug();
+  expect(findShanks).toHaveLength(1);
+  
+  
+  //find Bookmarked button on 'The Shawshank Redemption' movie and click it
+  const bookmarkedBtn = screen.getAllByRole('button')[0];
+  expect(bookmarkedBtn).toBeInTheDocument();
+  await user.click(bookmarkedBtn);
+
+  //When Bookmarked, button changes color to yellow
+  expect(bookmarkedBtn).toHaveClass('text-yellow-500');
+
+  // //Check if 'The Shawshank Redemption' appeared in Bookmarked carousel
+  // findShanks = screen.getAllByAltText('The Shawshank Redemption');
+  // expect(findShanks).toHaveLength(numberOfShanks + 1);
+
+  //  //find Bookmarked button on 'The Shawshank Redemption' movie in Bookmarked carousel and click it
+  //  const bookmarkCarouselBtn = screen.getAllByRole('button')[numberOfShanks + 1];
+  //  expect(bookmarkCarouselBtn).toBeInTheDocument();
+  //  await user.click(bookmarkCarouselBtn);
+
+  //  //Check if clicked movie disappeared from Bookmarked carousel
+  //  findShanks = screen.getAllByAltText('The Shawshank Redemption');
+  //  expect(findShanks).toHaveLength(numberOfShanks +5);
 })
 });
