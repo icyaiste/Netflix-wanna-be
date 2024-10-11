@@ -50,7 +50,7 @@ test('Renders a background image', () => {
 
 // 3. Test that clicking on a genre navigates to the correct page
 
-test.only('should navigate to the selected genre when a category is clicked', async () => {
+test('should navigate to the selected genre when a category is clicked', async () => {
   render(
     <MemoryRouter initialEntries={['/categories']}>
       <Routes>

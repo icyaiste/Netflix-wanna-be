@@ -36,7 +36,7 @@ vi.mock('../movies/movies.json', () => ({
   ],
 }));
 
-test.only('displays movies for the selected genre', () => {
+test('displays movies for the selected genre', () => {
   render(
     <MemoryRouter initialEntries={['/genre/Action']}>
       <Routes>
