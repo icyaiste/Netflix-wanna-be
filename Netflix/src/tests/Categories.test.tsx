@@ -69,6 +69,4 @@ test('should navigate to the selected genre when a category is clicked', async (
   expect(screen.getByText(/Action/i)).toBeInTheDocument();
   expect(screen.getByText('The Dark Knight')).toBeInTheDocument();
   expect(screen.getByText('Inception')).toBeInTheDocument();
-
-
 });
