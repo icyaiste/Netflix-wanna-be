@@ -1,4 +1,4 @@
-import { test, expect, beforeEach } from 'vitest';
+import { test, expect, beforeEach, describe } from 'vitest';
 import App from '../App';
 import { render, screen } from '@testing-library/react';
 import Carousel from '../components/carousel/Carousel';
@@ -38,4 +38,19 @@ test('trending movies are not in recommended movies', () => {
   recommendedMovies.forEach((movie) => {
     expect(movie).not.toHaveTextContent('The Shawshank Redemption');
   });
+});
+
+
+describe('bookmarked functionality', () =>{
+test.only('marked movies appear on bookmarked page', () => {
+  <MemoryRouter>
+    render(
+    <App />
+    );
+  </MemoryRouter>;
+})
+
+test('bookmark exists on FilmInfo page and is clickable', () => {
+    
+})
 });
