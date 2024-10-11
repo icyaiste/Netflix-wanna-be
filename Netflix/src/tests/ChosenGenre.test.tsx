@@ -51,5 +51,4 @@ test('displays movies for the selected genre', () => {
 
   expect(screen.queryByText('Drama Movie 1')).not.toBeInTheDocument();
 
-  screen.debug();
 });
