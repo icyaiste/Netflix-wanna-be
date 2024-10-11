@@ -29,8 +29,8 @@ test('trending movies are not in recommended movies', () => {
   expect(trendingMovies.length).toBeGreaterThan(0); // Ensure there are movies in "Trending"
 
   // Get the first trending movie
-  const firstTrendingMovie = screen.getByAltText('The Shawshank Redemption');
-  expect(firstTrendingMovie).toBeInTheDocument();
+  const firstTrendingMovie = screen.getAllByAltText('The Shawshank Redemption');
+  expect(firstTrendingMovie[0]).toBeInTheDocument();
 
   // Now check that the first trending movie is NOT in the "Recommended" section
   const recommendedMovies = screen.getAllByLabelText('Recommended');
