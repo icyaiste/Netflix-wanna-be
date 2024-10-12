@@ -7,7 +7,7 @@ import Bookmark from '../../components/bookmark/Bookmark';
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
-  console.log('Title from useParams:', title); 
+  console.log('Title from useParams:', title);
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,9 +18,11 @@ function FilmInfo() {
         const res = await import('../../movies/movies.json');
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
-       // console.log("thats the whole list of movies:",movies);
+        // console.log("thats the whole list of movies:",movies);
         //hitta filmen med den aktuella title
-        const foundMovie = movies.find((movie) => movie.title.toLowerCase() === title?.toLowerCase());
+        const foundMovie = movies.find(
+          (movie) => movie.title.toLowerCase() === title?.toLowerCase(),
+        );
         console.log('thats the title:', title);
         console.log('Found movie:', foundMovie);
         //om hittar filmen
@@ -60,8 +62,11 @@ function FilmInfo() {
           <h1 className="text-2xl sm:text-3xl  font-bold mb-2">
             {movie.title}
           </h1>
-          <p data-testid="movie-year" className="text-lg sm:text-xl text-gray-400 italic">
-          {movie.year} | {movie.rating}
+          <p
+            data-testid="movie-year"
+            className="text-lg sm:text-xl text-gray-400 italic"
+          >
+            {movie.year} | {movie.rating}
           </p>
         </div>
         <div className="bg-gray-800 p-4 rounded-lg w-full mt-4 font-karma relative">
@@ -78,10 +83,9 @@ function FilmInfo() {
               {movie.synopsis}
             </p>
             <div className="absolute bottom-12 right-2">
-          <Bookmark movie={movie} />
+              <Bookmark movie={movie} />
+            </div>
           </div>
-          </div>
-          
         </div>
       </div>
       <Footer />

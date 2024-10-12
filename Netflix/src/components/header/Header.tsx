@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DropdownIcon from '../../assets/menu-icon-white-2.jpg';
 import NotflixLogo from '../../assets/notflix.webp';
@@ -11,9 +11,8 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState<string>('');
   const [searchedMovies, setSearchedMovies] = useState<Movie[]>(films);
- 
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const goToCategories = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
