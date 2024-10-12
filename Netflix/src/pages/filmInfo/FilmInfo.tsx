@@ -60,8 +60,8 @@ function FilmInfo() {
           <h1 className="text-2xl sm:text-3xl  font-bold mb-2">
             {movie.title}
           </h1>
-          <p className="text-lg sm:text-xl text-gray-400 italic">
-            {movie.year} | {movie.rating}
+          <p data-testid="movie-year" className="text-lg sm:text-xl text-gray-400 italic">
+          {movie.year} | {movie.rating}
           </p>
         </div>
         <div className="bg-gray-800 p-4 rounded-lg w-full mt-4 font-karma relative">

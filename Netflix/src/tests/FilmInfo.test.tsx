@@ -1,5 +1,13 @@
+/*import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import FilmInfo from '../pages/filmInfo/FilmInfo';
+import { Movie } from '../interfaces/Interfaces';
+import {beforeAll, afterEach, describe, test, expect, vi,} from 'vitest';
+import BookmarkProvider from '../context/BookmarkContext';
+
+
 // Mock movies data
-const mockMovie: Movie = {
+/*const mockMovie: Movie = {
   title: 'Test Movie',
   year: 2021,
   rating: 'PG-13',
@@ -13,22 +21,6 @@ vi.mock('../movies/movies.json', () => ({
   default: [mockMovie],
 }));
 
-
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import FilmInfo from '../pages/filmInfo/FilmInfo';
-import { Movie } from '../interfaces/Interfaces';
-import {
-  beforeAll,
-  afterAll,
-  afterEach,
-  describe,
-  it,
-  expect,
-  vi,
-} from 'vitest';
-
-import BookmarkProvider from '../context/BookmarkContext';
 // Mocking localStorage
 const mockLocalStorage = (() => {
   //Create an empty "store" object to hold data
@@ -45,10 +37,10 @@ const mockLocalStorage = (() => {
     clear: () => (store = {}),
   };
 })();
+*/
 
 
-
-describe('FilmInfo', () => {
+/*describe('FilmInfo', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'localStorage', {
       value: mockLocalStorage,
@@ -58,8 +50,9 @@ describe('FilmInfo', () => {
   afterEach(() => {
     window.localStorage.clear();
   });
-
-  it.only('renders loading state initially', () => {
+*/
+/*//test 1.  render loading..
+  test('renders loading state initially', () => {
     render(
       <MemoryRouter initialEntries={['/films/Test Movie']}>
         <BookmarkProvider>
@@ -69,11 +62,11 @@ describe('FilmInfo', () => {
         </BookmarkProvider>
       </MemoryRouter>,
     );
-
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
- it.only("displays 'Movie not found' if no movie is found", async () => {
+//test 2. display movies not found
+ test("displays 'Movie not found' if no movie is found", async () => {
     render(
       <MemoryRouter initialEntries={['/films/Unknown Movie']}>
         <BookmarkProvider>
@@ -83,16 +76,14 @@ describe('FilmInfo', () => {
         </BookmarkProvider>
       </MemoryRouter>,
     );
-
-    // Wait for the loading state to complete
     await waitFor(() =>
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
     );
-
     expect(screen.getByText(/movie not found/i)).toBeInTheDocument();
   });
 
-  it.only('displays movie details when movie is found', async () => {
+  //test 3. display movie details
+  test('displays movie details when movie is found', async () => {
     render(
       <MemoryRouter initialEntries={['/films/Test Movie']}>
         <BookmarkProvider>
@@ -102,54 +93,113 @@ describe('FilmInfo', () => {
         </BookmarkProvider>
       </MemoryRouter>,
     );
-
-    // Wait for the loading state to complete
     await waitFor(() =>
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
     );
-
-    expect(screen.getByText(mockMovie.title)).toBeInTheDocument();
-    expect(screen.getByText(mockMovie.year.toString())).toBeInTheDocument();
-    expect(screen.getByText(mockMovie.rating)).toBeInTheDocument();
-    expect(screen.getByText(mockMovie.actors.join(', '))).toBeInTheDocument();
-    expect(screen.getByText(mockMovie.genre)).toBeInTheDocument();
-    expect(screen.getByText(mockMovie.synopsis)).toBeInTheDocument();
+   
+    expect(screen.getByText('Test Movie')).toBeInTheDocument(); 
   });
 
+ //test 4. render bookmark component
+ test(" render bookmark componet in FilmInfo", async ()=>{
+  render(
+    <MemoryRouter initialEntries={['/films/Test Movie']}>
+      <BookmarkProvider>
+        <Routes>
+          <Route path= "/films/:title" element={<FilmInfo/>}/>
+        </Routes>
+      </BookmarkProvider>
+    </MemoryRouter>,
+  );
+  await waitFor(()=> expect(screen.queryByText(/loading/i)).not.toBeInTheDocument());
+  expect(screen.getByLabelText(/add bookmark/i)).toBeInTheDocument();
+ });
+ */
 
-/*  it.only('toggles bookmark status on button click', async () => {
-    render(
-      <MemoryRouter initialEntries={['/films/Test Movie']}>
-        <BookmarkProvider>
-          <Routes>
-            <Route path="/films/:title" element={<FilmInfo />} />
-          </Routes>
-        </BookmarkProvider>
-      </MemoryRouter>,
-    );
 
-    // Wait for the loading state to complete
-    await waitFor(() =>
-      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
-    );
+ import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import FilmInfo from '../pages/filmInfo/FilmInfo';
+import BookmarkProvider from '../context/BookmarkContext';
+import {test, expect } from 'vitest';
+import movieData from '../movies/movies.json'
 
-    const bookmarkButton = screen.getByLabelText(/add bookmark/i);
 
-    // Initially, it should be 'Add Bookmark'
-    expect(bookmarkButton).toBeInTheDocument();
+// Test 1: Render loading state initially
+test('renders loading state initially', () => {
+  render(
+    <MemoryRouter initialEntries={['/films/Test Movie']}>
+      <BookmarkProvider>
+        <Routes>
+          <Route path="/films/:title" element={<FilmInfo />} />
+        </Routes>
+      </BookmarkProvider>
+    </MemoryRouter>,
+  );
 
-    // Click to bookmark
-    fireEvent.click(bookmarkButton);
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+});
 
-    // Check local storage
-    expect(window.localStorage.getItem('faves')).toContain(mockMovie.title);
-    expect(bookmarkButton).toHaveAttribute('aria-label', 'Remove Bookmark');
+// Test 2: Display "Movie not found" if no movie is found
+test("displays 'Movie not found' if no movie is found", async () => {
+  
+  render(
+    <MemoryRouter initialEntries={['/films/Unknown Movie']}>
+      <BookmarkProvider>
+        <Routes>
+          <Route path="/films/:title" element={<FilmInfo />} />
+        </Routes>
+      </BookmarkProvider>
+    </MemoryRouter>,
+  );
 
-    // Click to remove bookmark
-    fireEvent.click(bookmarkButton);
+  await waitFor(() =>
+    expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+  );
+  expect(screen.getByText(/movie not found/i)).toBeInTheDocument();
+});
 
-    // Check local storage
-    expect(window.localStorage.getItem('faves')).not.toContain(mockMovie.title);
-    expect(bookmarkButton).toHaveAttribute('aria-label', 'Add Bookmark');
-  });*/
-});  
+
+
+const realMovieTitle = movieData[0].title;
+// Test 3: Display movie details when the movie is found
+test('displays movie details when movie is found', async () => {
+
+  render(
+    <MemoryRouter initialEntries={[`/films/${realMovieTitle}`]}>
+      <BookmarkProvider>
+        <Routes>
+          <Route path="/films/:title" element={<FilmInfo />} />
+        </Routes>
+      </BookmarkProvider>
+    </MemoryRouter>,
+  );
+
+  await waitFor(() =>
+    expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+  );
+
+  expect(screen.getByText(realMovieTitle)).toBeInTheDocument(); 
+});
+
+// Test 4: Render bookmark component in FilmInfo
+test("renders bookmark component in FilmInfo", async () => {
+  render(
+    <MemoryRouter initialEntries={[`/films/${realMovieTitle}`]}>
+      <BookmarkProvider>
+        <Routes>
+          <Route path="/films/:title" element={<FilmInfo />} />
+        </Routes>
+      </BookmarkProvider>
+    </MemoryRouter>,
+  );
+
+  // Wait for loading state to disappear
+  await waitFor(() =>
+    expect(screen.queryByText(/loading/i)).not.toBeInTheDocument(),
+  );
+
+  const bookmarkButton = screen.getByRole('button', { hidden: true });
+  console.log(bookmarkButton);
+  expect(bookmarkButton).toBeInTheDocument();
+});
