@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full bg-black rounded-lg p-4 m-2 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center">
+    <footer className="w-full bg-black p-4 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center">
       {/* Questions Section */}
       <section className="flex flex-col items-center md:items-start text-center md:text-left mb-4 md:mb-0">
         <p className="text-xl mb-2 text-white">Questions?</p>
@@ -21,7 +21,7 @@ export default function Footer() {
       </section>
 
       {/* Copyright Section */}
-      <section className="flex flex-col items-center text-center md:text-left mb-4 md:mb-0">
+      <section className="flex flex-coljusti items-center text-center md:text-left mb-4 md:mb-0">
         <p className="text-2xl text-white mb-2">© 2024 Notflix</p>
       </section>
 
