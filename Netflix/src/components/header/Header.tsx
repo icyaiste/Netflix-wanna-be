@@ -13,6 +13,7 @@ export default function Header() {
   const [searchedMovies, setSearchedMovies] = useState<Movie[]>(films);
 
   const navigate = useNavigate();
+
   const goToCategories = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate('/categories');
