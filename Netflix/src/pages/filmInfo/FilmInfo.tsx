@@ -7,6 +7,7 @@ import Bookmark from '../../components/bookmark/Bookmark';
 
 function FilmInfo() {
   const { title } = useParams<{ title?: string }>();
+  console.log('Title from useParams:', title);
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,9 +18,13 @@ function FilmInfo() {
         const res = await import('../../movies/movies.json');
         //ge en variable till impoterade filmen
         const movies: Movie[] = res.default;
+        // console.log("thats the whole list of movies:",movies);
         //hitta filmen med den aktuella title
-        const foundMovie = movies.find((movie) => movie.title === title);
+        const foundMovie = movies.find(
+          (movie) => movie.title.toLowerCase() === title?.toLowerCase(),
+        );
         console.log('thats the title:', title);
+        console.log('Found movie:', foundMovie);
         //om hittar filmen
         if (foundMovie) {
           //säta filmen i state
@@ -74,8 +79,10 @@ function FilmInfo() {
               <span className="font-bold text-xl">Synopsis:</span>{' '}
               {movie.synopsis}
             </p>
+            <div className="absolute bottom-12 right-2">
+              <Bookmark movie={movie} />
+            </div>
           </div>
-          <Bookmark movie={movie} />
         </div>
       </div>
       <Footer />

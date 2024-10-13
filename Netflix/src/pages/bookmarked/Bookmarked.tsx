@@ -13,24 +13,24 @@ function Bookmarked() {
   };
 
   return (
-    <div>
+    <div className="">
       <Header />
-      <div>
+      <div className="py-2">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
           Bookmarks
         </h1>
       </div>
-      <div className="flex justify-center">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 px-4 py-8">
+      <div className="flex justify-center min-h-[27rem]">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 px-2 py-4">
           {faves.map((movie, index) => (
             <div
               key={index}
-              className="flex-col flex-shrink-0 w-[225px] h-[330px] p-[7px] relative"
+              className="flex-col flex-shrink-0 w-[190px] h-[330px] p-[7px] relative"
             >
               <img
                 src={movie.thumbnail}
                 alt={movie.title}
-                className="w-full h-[90%] object-contain rounded-lg shadow-md"
+                className="w-full h-[80%] object-contain rounded-lg shadow-md"
                 onClick={() => handleNavigateToFilmInfo(movie.title)}
               />
               <section className="h-[35px] w-[95%] flex justify-between items-center ml-2">

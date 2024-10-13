@@ -75,7 +75,7 @@ function Categories() {
           <section
             key={genre.name}
             className="h-56 sm:h-80 w-full bg-cover bg-center rounded-lg shadow-lg text-white flex items-center justify-center 
-             font-bold text-xl sm:text-2xl md:text-3xl hover:cursor-pointer hover:brightness-75 transition duration-300 ease-in-out"
+             font-bold text-xl sm:text-2xl md:text-3xl hover:cursor-pointer hover:brightness-75 hover:scale-105 transition duration-300 ease-in-out"
             style={{ backgroundImage: `url(${genre.image})` }}
             onClick={() => handleClick(genre.name)}
           >

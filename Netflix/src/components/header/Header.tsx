@@ -13,6 +13,7 @@ export default function Header() {
   const [searchedMovies, setSearchedMovies] = useState<Movie[]>(films);
 
   const navigate = useNavigate();
+
   const goToCategories = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate('/categories');
@@ -65,7 +66,7 @@ export default function Header() {
         {/* Dropdown Menu */}
         <div
           aria-label="dropdown"
-          className={`z-[1] absolute left-20 mt-20 bg-red-700 border border-black rounded-lg shadow-lg transition-all duration-100 ease-in-out origin-top transform ${
+          className={`z-[1] w-[10rem] absolute left-10 top-0.5 bg-red-700 border border-black rounded-lg shadow-lg transition-all duration-100 ease-in-out origin-top transform ${
             isOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
           }`}
           style={{ transformOrigin: 'top' }}
@@ -94,7 +95,7 @@ export default function Header() {
       </div>
 
       {/* Logo Section */}
-      <div className="flex justify-center md:justify-start md:order-2 w-full md:w-auto">
+      <div className="flex justify-center md:justify-start md:order-3 w-full md:w-auto">
         <img
           src={NotflixLogo}
           alt="Notflix Logo"
@@ -103,7 +104,7 @@ export default function Header() {
       </div>
 
       {/* Search Box */}
-      <section className="w-full md:w-auto mt-4 md:mt-0 md:order-3">
+      <section className="w-full md:w-auto mt-4 md:mt-0 md:order-2">
         <input
           role="searchbox"
           className="w-full md:w-[15rem] bg-white text-black border rounded-3xl p-2"
@@ -113,7 +114,7 @@ export default function Header() {
         />
         <ul>
           {query && searchedMovies.length > 0 && (
-            <ul className="z-[1] absolute bg-black border-white border rounded-lg justify-center mt-2 p-2 w-full md:w-[54rem] flex flex-wrap">
+            <ul className="z-[1] absolute bg-black border-white border rounded-lg justify-center mt-2 p-2 w-full sm:w-[30rem] md:w-[40rem] lg:w-[50rem] xl:w-[60rem] flex flex-wrap">
               {searchedMovies.map((movie) => (
                 <div
                   className="border rounded border-white bg-red-800 p-2 flex flex-col place-items-center m-2 w-full md:w-[16rem]"
