@@ -34,7 +34,7 @@ const ChosenGenre = () => {
             <img
               src={movie.thumbnail}
               alt={movie.title}
-              className="h-64 w-full object-cover rounded-t-lg"
+              className="md:h-[46rem] w-full object-cover rounded-t-lg"
             />
             <h2 className="text-center text-lg sm:text-xl font-bold mt-2">
               {movie.title}
