@@ -63,7 +63,6 @@ function FilmInfo() {
             {movie.title}
           </h1>
           <p
-            data-testid="movie-year"
             className="text-lg sm:text-xl text-gray-400 italic"
           >
             {movie.year} | {movie.rating}
