@@ -62,9 +62,7 @@ function FilmInfo() {
           <h1 className="text-2xl sm:text-3xl  font-bold mb-2">
             {movie.title}
           </h1>
-          <p
-            className="text-lg sm:text-xl text-gray-400 italic"
-          >
+          <p className="text-lg sm:text-xl text-gray-400 italic">
             {movie.year} | {movie.rating}
           </p>
         </div>
