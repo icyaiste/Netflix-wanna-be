@@ -6,7 +6,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Netflix-wanna-be/",
+  // base: "/Netflix-wanna-be/",
   test: {
     globals: true,
     environment: "jsdom",
